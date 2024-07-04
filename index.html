@@ -5,230 +5,261 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<!-- 	This is the "Head" of the HTML document.
+<!-- 	This is the "Head" of the HTML document.
 		It contains information that isn't displayed on the actual page, but is useful
 		for the web browser when loading the page	
 	-->
-	<head>
-		<!-- This is the title of the page. It is the text that appears inside this pages tab in your web browser -->
-		<title>Qiaochu Wan</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!-- 	This links to this page's CSS, which is contained in the folder assets/css and the file main.css.
+
+<head>
+	<!-- This is the title of the page. It is the text that appears inside this pages tab in your web browser -->
+	<title>Qiaochu Wan</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!-- 	This links to this page's CSS, which is contained in the folder assets/css and the file main.css.
 			 If you want to edit the styling of this page, you should edit the file assets/css/main.css
 			 If you have a new CSS file you'd like to add with custom styling, you should link to it here using:
 			 <link rel="stylesheet" href="assets/css/my-new-css-file.css"/> 
 		-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!-- 	In the case that the user's browser does not support JavaScript (unlikely, but possible), the page
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<!-- 	In the case that the user's browser does not support JavaScript (unlikely, but possible), the page
 			will load a separate set of CSS stylings from the file assets/css/noscript.css
 			Any HTML contained inside <noscript></noscript> tags will be loaded in the event that JavaScript is not
 			available. 
 		-->
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<!-- The body is the location where your site's content will go -->
-	<body class="is-preload">
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+<!-- The body is the location where your site's content will go -->
 
-			<!-- This "div" wraps around all of our content and just changes how things are layed out -->
-			<div id="wrapper">
+<body class="is-preload">
 
-					<!-- This is where the content that appears on page load exists -->
-					<header id="header">
-						<!-- This is the main content of the front page -->
-						<div class="content">
-							<div class="inner">
-								<!-- Here is a heading where you can put your name -->
-								<h1>
-									Qiaochu Wan
-								</h1>
-								<!-- 	Here is an image where you can put a picture of you. 
+	<!-- This "div" wraps around all of our content and just changes how things are layed out -->
+	<div id="wrapper">
+
+		<!-- This is where the content that appears on page load exists -->
+		<header id="header">
+			<!-- This is the main content of the front page -->
+			<div class="content">
+				<div class="inner">
+					<!-- Here is a heading where you can put your name -->
+					<h1>
+						Qiaochu Wan
+					</h1>
+					<!-- 	Here is an image where you can put a picture of you. 
 									You can change the width and height attributes below to change how large
 									your image is.
 
 									Try adding "border-radius: 50%;" to the style attribute.
 								-->
-								<img src="images/undefined - Imgur.gif" style="width:280px; height:280px; object-fit: cover;">
-								<!-- 	Here is a paragraph where you can put your position and institution, or
+					<img src="images/undefined - Imgur.gif" style="width:280px; height:280px; object-fit: cover;">
+					<!-- 	Here is a paragraph where you can put your position and institution, or
 									a short line about yourself.
 								-->
-								<p>
-									PhD candidate of Physics <br> University of Pittsburgh
-								</p>
-								<!-- Here is a paragraph where you can put a link to your CV -->
-								<p>
-									<!-- Note you will want to change where this points to! -->
-									<a href="images/CV.pdf" target="_blank">Curriculum Vitae</a>
-								</p>
-							</div>
-						</div>
-						<!-- This is the navigation menu -->
-						<nav>
-							<!-- This element makes an "Unordered List" -->
-							<ul>
-								<!-- This is a "List Item" -->
-								<li>
-									<!-- 	Note that this links to #about, which will move the page to wherever
+					<p>
+						PhD candidate of Physics <br> University of Pittsburgh
+					</p>
+					<!-- Here is a paragraph where you can put a link to your CV -->
+					<p>
+						<!-- Note you will want to change where this points to! -->
+						<a href="images/CV.pdf" target="_blank">Curriculum Vitae</a>
+					</p>
+				</div>
+			</div>
+			<!-- This is the navigation menu -->
+			<nav>
+				<!-- This element makes an "Unordered List" -->
+				<ul>
+					<!-- This is a "List Item" -->
+					<li>
+						<!-- 	Note that this links to #about, which will move the page to wherever
 										the element with the id "about" exists.
 									-->
-									<a href="#about">About Me</a>
-								</li>
-								<li>
-									<a href="#research">Research</a>
-								</li>
-								<li>
-									<a href="#community">Community</a>
-								</li>
-								<li>
-									<a href="#contact">Contact</a>
-								</li>
-								<!-- 	You can add another button to your navigation menu by adding
+						<a href="#about">About Me</a>
+					</li>
+					<li>
+						<a href="#research">Research</a>
+					</li>
+					<li>
+						<a href="#community">Community</a>
+					</li>
+					<li>
+						<a href="#contact">Contact</a>
+					</li>
+					<!-- 	You can add another button to your navigation menu by adding
 									another List Item with a link inside of it.
 								-->
-								<!-- <li>
+					<!-- <li>
 									<a href="images/Astronomy.jpg">My CV</a>
 								</li> -->
-							</ul>
-						</nav>
-					</header>
+				</ul>
+			</nav>
+		</header>
 
-					<!-- These are the "cards" that appear when you click the buttons on the main page -->
-					<div id="main">
-						<!-- 	Here is the "About Me" card. Note it has the id "about", which the previous 
+		<!-- These are the "cards" that appear when you click the buttons on the main page -->
+		<div id="main">
+			<!-- 	Here is the "About Me" card. Note it has the id "about", which the previous 
 							button links to.
 						-->
-						<article id="about">
-							<h2 class="major">About Me</h2>
-							<!-- Here is an image that you can customize for this page -->
-							<span class="image main">
-								<img src="images/pic01.jpg" alt=""/>
-							</span>
-							<!-- Here are three paragraphs where you can fill out information about yourself -->
-							<p>
-								<!-- Items contained in <b> tags are bolded! -->
-								<b>Education: Shanghaitech University, University of California, Berkeley, University of Pittsburgh</b>
-							</p>
-							<p>
-								<b>Research Interests:2D material,excitonic structure, polariton</b>
-							</p>
-							<p>
-								<b>Publications:</b> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&hl=en">Google scholar link</a>
-							</p>
-						</article>
+			<article id="about">
+				<h2 class="major">About Me</h2>
+				<!-- Here is an image that you can customize for this page -->
+				<span class="image main">
+					<img src="images/pic01.jpg" alt="" />
+				</span>
+				<!-- Here are three paragraphs where you can fill out information about yourself -->
+				<p>
+					<!-- Items contained in <b> tags are bolded! -->
+					<b>Education: Shanghaitech University, University of California, Berkeley, University of
+						Pittsburgh</b>
+				</p>
+				<p>
+					<b>Research Interests:2D material,excitonic structure, polariton,test</b>
+				</p>
+				<p>
+					<b>Publications:</b> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&hl=en">Google
+						scholar link</a>
+				</p>
+			</article>
 
-						<!-- Here is the "Research" card. -->
-						<article id="research">
-							<h2 class="major">Research</h2>
-							<span class="image main">
-								<img src="images/pic02.jpg" alt=""/>
-							</span>
-							<p>
-								<!-- 	A <br> tag puts in a break so that the text that follows it displays on
+			<!-- Here is the "Research" card. -->
+			<article id="research">
+				<h2 class="major">Research</h2>
+				<span class="image main">
+					<img src="images/pic02.jpg" alt="" />
+				</span>
+				<p>
+					<!-- 	A <br> tag puts in a break so that the text that follows it displays on
 									the next line.
 								-->
-								<b> High-efficiency polariton Laser</b><br>We have placed a van der Waals homostructure, formed by stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a multiple-quantum well structure, inside a microcavity, which facilitates the formation of quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter, allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers. In the experiments reported here, we have observed laser emission with an ultralow threshold. The threshold was approximately 59 nW/μm2, with a lasing efficiency of 3.82%. These findings suggest a potential for efficient laser operations using such homostructures.
-							<p>
-								<b>Magneto-optic characterization of quaternion state in TMD bilayers</b><br>Van der Waals (vdW) heterostructures have served as a new platform for exploring novel higher-order excitonic bound states including trions, biexictions and even ``hexcitons'' and ``oxcitons.'' [1] In our recent experiments [2], we observed evidence for a new bound excitonic state in a bilayer structure: two free carriers bound to an exciton, forming a doubly charged ``quaternion.'' The key feature of this state is that the metallic screening helps to reduce the overall repulsion of like charges. We have conducted many controlled experiments with different designs to show that the quaternion state only exist when the full structure is in place, including the bilayer and the metallic layer under it. We have measured the magnetic field dependence of the photoluminescence (PL) of these complexes. The magnetic field was applied in both out-of-plane directions from 0 to 14 Tesla, and the PL was measured in different circular polarized components of photoluminescence. The energy of the trions and excitons shift linearly with the magnetic field. In contrast, the energy of the quaternion shows a non-linear relationship with the magnetic field, which is also asymmetric with the direction of the magnetic field. The asymmetry is consistent with the fact that the quaternion state is asymmetric in the z-direction, as predicted by theory. We are moving forward to put a top gate on these devices to allow continuous variation of the doping level. These metal-screened novel bound states are potentially charged bosons, which can even be a potential candidate for room-temperature and atmospheric-pressure superconductivity.
-							</p>
-						</article>
+					<b> High-efficiency polariton Laser</b><br>We have placed a van der Waals homostructure, formed by
+					stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a
+					multiple-quantum well structure, inside a microcavity, which facilitates the formation of
+					quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter,
+					allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers.
+					In the experiments reported here, we have observed laser emission with an ultralow threshold. The
+					threshold was approximately 59 nW/μm2, with a lasing efficiency of 3.82%. These findings suggest a
+					potential for efficient laser operations using such homostructures.
+				<p>
+					<b>Magneto-optic characterization of quaternion state in TMD bilayers</b><br>Van der Waals (vdW)
+					heterostructures have served as a new platform for exploring novel higher-order excitonic bound
+					states including trions, biexictions and even ``hexcitons'' and ``oxcitons.'' [1] In our recent
+					experiments [2], we observed evidence for a new bound excitonic state in a bilayer structure: two
+					free carriers bound to an exciton, forming a doubly charged ``quaternion.'' The key feature of this
+					state is that the metallic screening helps to reduce the overall repulsion of like charges. We have
+					conducted many controlled experiments with different designs to show that the quaternion state only
+					exist when the full structure is in place, including the bilayer and the metallic layer under it. We
+					have measured the magnetic field dependence of the photoluminescence (PL) of these complexes. The
+					magnetic field was applied in both out-of-plane directions from 0 to 14 Tesla, and the PL was
+					measured in different circular polarized components of photoluminescence. The energy of the trions
+					and excitons shift linearly with the magnetic field. In contrast, the energy of the quaternion shows
+					a non-linear relationship with the magnetic field, which is also asymmetric with the direction of
+					the magnetic field. The asymmetry is consistent with the fact that the quaternion state is
+					asymmetric in the z-direction, as predicted by theory. We are moving forward to put a top gate on
+					these devices to allow continuous variation of the doping level. These metal-screened novel bound
+					states are potentially charged bosons, which can even be a potential candidate for room-temperature
+					and atmospheric-pressure superconductivity.
+				</p>
+			</article>
 
-						<!-- Here is the "Community" card. -->
-						<article id="community">
-							<h2 class="major">Community</h2>
-							<span class="image main">
-								<img src="images/pic03.jpg" alt=""/>
-							</span>
-							<p>
-								<b>Teaching:physics lab 101</b>
-							</p>
-							<p>
-								<b>Outreach:</b> <a href="https://www.snokelab.com">Snoke Lab</a>
-							</p>
-							<p>
-								<b>Equity & Inclusion: Our lab is highly diverse with members from various backgrounds.  </b>
-							</p>
-						</article>
+			<!-- Here is the "Community" card. -->
+			<article id="community">
+				<h2 class="major">Community</h2>
+				<span class="image main">
+					<img src="images/pic03.jpg" alt="" />
+				</span>
+				<p>
+					<b>Teaching:physics lab 101</b>
+				</p>
+				<p>
+					<b>Outreach:</b> <a href="https://www.snokelab.com">Snoke Lab</a>
+				</p>
+				<p>
+					<b>Equity & Inclusion: Our lab is highly diverse with members from various backgrounds. </b>
+				</p>
+			</article>
 
-						<!-- Here is a the "Contact" card. -->
-						<article id="contact">
-							<h2 class="major">Contact</h2>
-							<p> 
-								<b>Email:qiw74@pitt.edu</b> 
-							</p>
-							<p> 
-								<b>Address:Allen Hall G17</b> 
-							</p>
+			<!-- Here is a the "Contact" card. -->
+			<article id="contact">
+				<h2 class="major">Contact</h2>
+				<p>
+					<b>Email:qiw74@pitt.edu</b>
+				</p>
+				<p>
+					<b>Address:Allen Hall G17</b>
+				</p>
 
-							<!-- 	Here are the fancy icons that link to your social media.
+				<!-- 	Here are the fancy icons that link to your social media.
 								These icons are rendered using Font Awesome fonts, and you can find more icons
 								here: https://fontawesome.com/icons
 							-->
-							<ul class="icons">
-								<!-- The Twitter icon -->
-								<li>
-									<!-- 	Note that you need to change the link to point to your page.
+				<ul class="icons">
+					<!-- The Twitter icon -->
+					<li>
+						<!-- 	Note that you need to change the link to point to your page.
 										Replace "#" with your Twitter profile page.
 									-->
-									<a href="#" class="icon fa-twitter">
-										<span class="label">Twitter</span>
-									</a>
-								</li>
-								<!-- The Facebook icon -->
-								<li>
-									<a href="#" class="icon fa-facebook">
-										<span class="label">Facebook</span>
-									</a>
-								</li>
-								<!-- The Instagram icon -->
-								<li>
-									<a href="#" class="icon fa-instagram">
-										<span class="label">Instagram</span>
-									</a>
-								</li>
-								<!-- The GitHub icon -->
-								<li>
-									<a href="#" class="icon fa-github">
-										<span class="label">GitHub</span>
-									</a>
-								</li>
-								<!-- 	We can add a new icon by searching on the Font Awesome website
+						<a href="#" class="icon fa-twitter">
+							<span class="label">Twitter</span>
+						</a>
+					</li>
+					<!-- The Facebook icon -->
+					<li>
+						<a href="#" class="icon fa-facebook">
+							<span class="label">Facebook</span>
+						</a>
+					</li>
+					<!-- The Instagram icon -->
+					<li>
+						<a href="#" class="icon fa-instagram">
+							<span class="label">Instagram</span>
+						</a>
+					</li>
+					<!-- The GitHub icon -->
+					<li>
+						<a href="#" class="icon fa-github">
+							<span class="label">GitHub</span>
+						</a>
+					</li>
+					<!-- 	We can add a new icon by searching on the Font Awesome website
 									for the correct class name and inserting it as a new list item.
 
 									We found "envelope" here: https://fontawesome.com/icons/envelope
 								-->
-								<!-- <li>
+					<!-- <li>
 									<a href="#" class="icon fa-envelope">
 										<span class="label">Email</span>
 									</a>
 								</li> -->
-							</ul>
-						</article>
-					</div>
+				</ul>
+			</article>
+		</div>
 
-					<!-- This is the footer that appears at the bottom of the page -->
-					<footer id="footer">
-						<!-- 	You can change "Untitled" to your name to show everyone that
+		<!-- This is the footer that appears at the bottom of the page -->
+		<footer id="footer">
+			<!-- 	You can change "Untitled" to your name to show everyone that
 							this is your work.
 						-->
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-					</footer>
+			<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+		</footer>
 
-			</div>
+	</div>
 
-			<!--	This is the background image of the site.
+	<!--	This is the background image of the site.
 				All configuration of the background is done with CSS.
 				Look in the file assets/css/main.css and search for "#bg" to
 				see how this element is styled. Look for comments pointing 
 				to where you can set a new background image.
 			-->
-			<div id="bg"></div>
+	<div id="bg"></div>
 
-			<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
-	</body>
+</body>
+
 </html>
