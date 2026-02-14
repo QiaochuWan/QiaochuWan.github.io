@@ -1,79 +1,55 @@
 <!DOCTYPE HTML>
 <!--
-	Dimension by HTML5 UP
+	Story by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-<!-- 	This is the "Head" of the HTML document.
-		It contains information that isn't displayed on the actual page, but is useful
-		for the web browser when loading the page	
-	-->
+	<head>
+		<title>Qiaochu Wan</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-<head>
-			<!-- ===== D20 DICE ROLLER STYLES ===== -->
-
-	<!-- This is the title of the page. It is the text that appears inside this pages tab in your web browser -->
-	<title>Qiaochu Wan</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<!-- 	This links to this page's CSS, which is contained in the folder assets/css and the file main.css.
-			 If you want to edit the styling of this page, you should edit the file assets/css/main.css
-			 If you have a new CSS file you'd like to add with custom styling, you should link to it here using:
-			 <link rel="stylesheet" href="assets/css/my-new-css-file.css"/> 
-		-->
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<!-- 	In the case that the user's browser does not support JavaScript (unlikely, but possible), the page
-			will load a separate set of CSS stylings from the file assets/css/noscript.css
-			Any HTML contained inside <noscript></noscript> tags will be loaded in the event that JavaScript is not
-			available. 
-		-->
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+		<!-- D20 Dice Roller Styles -->
 		<style>
-			/* ---- Button ---- */
+			/* ── Button ── */
 			.dice-roll-btn {
 				display: inline-flex;
 				align-items: center;
 				gap: 10px;
 				margin-top: 1.4em;
-				padding: 0.7em 1.6em;
+				padding: 0.65em 1.5em;
 				background: linear-gradient(135deg, #1a0533 0%, #3a0a6e 50%, #1a0533 100%);
 				border: 2px solid #7c3aed;
 				border-radius: 8px;
 				color: #e0c3ff;
 				font-family: 'Georgia', serif;
-				font-size: 1em;
+				font-size: 0.95em;
 				font-weight: bold;
-				letter-spacing: 0.05em;
+				letter-spacing: 0.06em;
 				cursor: pointer;
-				position: relative;
-				overflow: hidden;
 				transition: all 0.3s ease;
-				box-shadow: 0 0 12px rgba(124, 58, 237, 0.5), inset 0 0 8px rgba(124, 58, 237, 0.15);
-				text-shadow: 0 0 8px rgba(200, 150, 255, 0.8);
+				box-shadow: 0 0 14px rgba(124,58,237,0.5), inset 0 0 8px rgba(124,58,237,0.1);
+				text-shadow: 0 0 8px rgba(200,150,255,0.8);
 			}
 			.dice-roll-btn:hover {
 				background: linear-gradient(135deg, #2d0a55 0%, #5b12a8 50%, #2d0a55 100%);
-				box-shadow: 0 0 24px rgba(124, 58, 237, 0.9), inset 0 0 12px rgba(124, 58, 237, 0.3);
+				box-shadow: 0 0 26px rgba(124,58,237,0.9), inset 0 0 14px rgba(124,58,237,0.3);
 				transform: translateY(-2px);
 				border-color: #a855f7;
 			}
 			.dice-roll-btn:active { transform: translateY(0); }
-			.dice-roll-btn .btn-d20-icon {
-				font-size: 1.3em;
-				filter: drop-shadow(0 0 4px #a855f7);
-			}
 
-			/* ---- Overlay Backdrop ---- */
+			/* ── Overlay ── */
 			#dice-overlay {
 				display: none;
 				position: fixed;
 				inset: 0;
-				z-index: 9999;
-				background: rgba(5, 0, 18, 0.82);
-				backdrop-filter: blur(4px);
+				z-index: 99999;
+				background: rgba(5,0,18,0.85);
+				backdrop-filter: blur(5px);
 				justify-content: center;
 				align-items: center;
 				flex-direction: column;
@@ -81,663 +57,420 @@
 			}
 			#dice-overlay.active { display: flex; }
 
-			/* ---- Canvas container ---- */
+			/* ── Canvas ── */
 			#dice-canvas-wrap {
 				position: relative;
 				width: 260px;
 				height: 260px;
+				cursor: default;
 			}
-			#dice-canvas {
-				width: 100%;
-				height: 100%;
-			}
+			#dice-canvas { width: 100%; height: 100%; }
 
-			/* ---- Result number ---- */
+			/* ── Result ── */
 			#dice-result {
-				margin-top: 22px;
+				margin-top: 20px;
 				font-size: 5.5em;
 				font-family: 'Georgia', serif;
 				font-weight: bold;
 				color: #fff;
-				text-shadow: 0 0 20px #c084fc, 0 0 50px #7c3aed, 0 0 80px #4c1d95;
+				text-shadow: 0 0 20px #c084fc, 0 0 50px #7c3aed, 0 0 90px #4c1d95;
 				opacity: 0;
-				transform: scale(0.4);
-				transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+				transform: scale(0.3);
+				transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
 				text-align: center;
-				line-height: 1;
 			}
-			#dice-result.show {
-				opacity: 1;
-				transform: scale(1);
-			}
+			#dice-result.show { opacity: 1; transform: scale(1); }
 
-			/* Critical Hit / Fail labels */
 			#dice-result-label {
-				margin-top: 4px;
-				font-size: 1.1em;
+				margin-top: 6px;
+				font-size: 1.05em;
 				font-family: 'Georgia', serif;
 				letter-spacing: 0.12em;
+				text-transform: uppercase;
 				color: #e0c3ff;
 				opacity: 0;
 				transition: opacity 0.5s ease 0.3s;
 				text-align: center;
-				text-transform: uppercase;
-				min-height: 1.4em;
+				min-height: 1.5em;
 			}
-			#dice-result-label.show { opacity: 1; }
-			#dice-result-label.crit { color: #fbbf24; text-shadow: 0 0 16px #f59e0b; }
-			#dice-result-label.fail { color: #f87171; text-shadow: 0 0 16px #ef4444; }
+			#dice-result-label.show  { opacity: 1; }
+			#dice-result-label.crit  { color: #fbbf24; text-shadow: 0 0 16px #f59e0b; }
+			#dice-result-label.fail  { color: #f87171; text-shadow: 0 0 16px #ef4444; }
 
-			/* Dismiss hint */
-			#dice-dismiss {
-				margin-top: 28px;
+			#dice-hint {
+				margin-top: 24px;
 				font-size: 0.78em;
-				color: rgba(200,180,255,0.5);
-				letter-spacing: 0.08em;
+				color: rgba(200,180,255,0.45);
 				font-family: sans-serif;
+				letter-spacing: 0.07em;
 				opacity: 0;
-				transition: opacity 0.4s ease 1.2s;
+				transition: opacity 0.4s ease 1.1s;
 			}
-			#dice-dismiss.show { opacity: 1; }
+			#dice-hint.show { opacity: 1; }
 
-			/* Particle sparks */
+			/* ── Sparks ── */
 			.spark {
 				position: absolute;
 				border-radius: 50%;
 				pointer-events: none;
-				animation: spark-fly 0.9s ease-out forwards;
+				animation: spark-out 0.85s ease-out forwards;
 			}
-			@keyframes spark-fly {
+			@keyframes spark-out {
 				0%   { transform: translate(0,0) scale(1); opacity: 1; }
-				100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+				100% { transform: translate(var(--tx),var(--ty)) scale(0); opacity: 0; }
 			}
 
-			/* Screen-shake overlay */
-			@keyframes shake {
-				0%,100% { transform: translate(0,0) rotate(0deg); }
-				15%      { transform: translate(-6px,3px) rotate(-1deg); }
-				30%      { transform: translate(5px,-4px) rotate(1deg); }
-				45%      { transform: translate(-4px,5px) rotate(-0.5deg); }
-				60%      { transform: translate(4px,-3px) rotate(0.5deg); }
-				75%      { transform: translate(-2px,2px) rotate(-0.3deg); }
+			/* ── Screen shake ── */
+			@keyframes d20-shake {
+				0%,100% { transform: translate(0,0) rotate(0); }
+				15%     { transform: translate(-7px,4px) rotate(-1.2deg); }
+				30%     { transform: translate(6px,-5px) rotate(1deg); }
+				50%     { transform: translate(-4px,5px) rotate(-0.6deg); }
+				70%     { transform: translate(4px,-3px) rotate(0.5deg); }
 			}
-			.dice-shake { animation: shake 0.45s ease; }
-	</style>
-</head>
-<!-- The body is the location where your site's content will go -->
+			.shaking { animation: d20-shake 0.45s ease; }
+		</style>
+	</head>
+	<body class="is-preload">
 
-<body class="is-preload">
+		<!-- Wrapper -->
+		<div id="wrapper" class="divided">
 
-	<!-- This "div" wraps around all of our content and just changes how things are layed out -->
-	<div id="wrapper">
-
-		<!-- This is where the content that appears on page load exists -->
-		<header id="header">
-			<!-- This is the main content of the front page -->
-			<div class="content">
-				<div class="inner">
-					<!-- Here is a heading where you can put your name -->
-					<h1>
-						Qiaochu Wan
-					</h1>
-					<!-- 	Here is an image where you can put a picture of you. 
-									You can change the width and height attributes below to change how large
-									your image is.
-
-									Try adding "border-radius: 50%;" to the style attribute.
-								-->
-					<img src="images/qiaochuwan.webp" style="width:280px; height:280px; object-fit: cover;">
-					<!-- 	Here is a paragraph where you can put your position and institution, or
-									a short line about yourself.
-								-->
-					<p>
-						Ph.D. in Physics <br> University of Pittsburgh
-					</p>
-					<!-- Here is a paragraph where you can put a link to your CV -->
-					<p>
-						<!-- Note you will want to change where this points to! -->
-						<a href="images/CV.pdf" target="_blank">Curriculum Vitae</a>
-					</p>
-		            <p>
-						<!-- Note you will want to change where this points to! -->
-						<a href="images/qiaochuwan_resume.pdf" target="_blank">Resume</a>
-					</p>
+			<!-- Banner (Intro) -->
+			<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+				<div class="content">
+					<h1>Qiaochu Wan</h1>
+					<p class="major">Ph.D. in Physics <br />
+					University of Pittsburgh</p>
+					<ul class="actions stacked">
+						<li><a href="images/CV.pdf" class="button big wide smooth-scroll-middle">Curriculum Vitae</a></li>
+						<li><a href="images/qiaochuwan_resume.pdf" class="button big wide smooth-scroll-middle">Resume</a></li>
+					</ul>
 				</div>
-			</div>
-			<!-- This is the navigation menu -->
-			<nav>
-				<!-- This element makes an "Unordered List" -->
-				<ul>
-					<!-- This is a "List Item" -->
-					<li>
-						<!-- 	Note that this links to #about, which will move the page to wherever
-										the element with the id "about" exists.
-									-->
-						<a href="#about">About Me</a>
-					</li>
-					<li>
-						<a href="#research">Research</a>
-					</li>
-					<li>
-						<a href="#community">Community</a>
-					</li>
-					<li>
-						<a href="#contact">Contact</a>
-					</li>
-					<!-- 	You can add another button to your navigation menu by adding
-									another List Item with a link inside of it.
-								-->
-					<!-- <li>
-									<a href="images/Astronomy.jpg">My CV</a>
-								</li> -->
-				</ul>
-			</nav>
-		</header>
+				<div class="image">
+					<img src="images/qiaochuwan.webp" alt="" />
+				</div>
+			</section>
 
-		<!-- These are the "cards" that appear when you click the buttons on the main page -->
-		<div id="main">
-			<!-- 	Here is the "About Me" card. Note it has the id "about", which the previous 
-							button links to.
-						-->
-			<article id="about">
-				<h2 class="major">About Me</h2>
-				<!-- Here is an image that you can customize for this page -->
-				<span class="image main">
-					<img src="images/TRPG2.jpg" alt="" />
-				</span>
-				<!-- Here are three paragraphs where you can fill out information about yourself -->
-				<p>
-					<!-- Items contained in <b> tags are bolded! -->
-					<b>Education: Shanghaitech University, University of California, Berkeley, University of
-						Pittsburgh</b>
-				</p>
-				<p>
-					<b>Research Interests:2D material,excitonic structure, polariton, light-matter interaction</b>
-				</p>
-				<p>
-					<b>Publications:</b> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&hl=en">Google
-						scholar link</a>
-				</p>
-				<button class="dice-roll-btn" id="roll-btn" aria-label="Roll a D20">
-						<span class="btn-d20-icon">⬡</span>
+			<!-- About Me -->
+			<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="about">
+				<div class="content">
+					<h2>About Me</h2>
+					<p><strong>Education: Shanghaitech University, University of California, Berkeley, University of
+					Pittsburgh</strong></p>
+					<p><strong>Research Interests:2D material,excitonic structure, polariton, light-matter interaction</strong></p>
+					<p><strong>Publications:</strong> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&amp;hl=en">Google
+					scholar link</a></p>
+
+					<!-- ★ D20 DICE ROLLER BUTTON ★ -->
+					<button class="dice-roll-btn" id="roll-btn" aria-label="Roll a D20 dice">
+						<span aria-hidden="true">⬡</span>
 						Roll a D20
-				</button>
-			</article>
+					</button>
+				</div>
+				<div class="image">
+					<img src="images/TRPG2.jpg" alt="" />
+				</div>
+			</section>
 
-			<!-- Here is the "Research" card. -->
-			<article id="research">
-				<h2 class="major">Research</h2>
-				<span class="image main">
-					<img src="images/graphene.gif" alt="" />
-				</span>
-				<p>
-					<!-- 	A <br> tag puts in a break so that the text that follows it displays on
-									the next line.
-								-->
-					<b> High-efficiency polariton Laser</b><br>We have placed a van der Waals homostructure, formed by
-					stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a
-					multiple-quantum well structure, inside a microcavity, which facilitates the formation of
-					quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter,
-					allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers.
-					In the experiments reported here, we have observed laser emission with an ultralow threshold. The
-					threshold was approximately 59 nW/μm2, with a lasing efficiency of 3.82%. These findings suggest a
-					potential for efficient laser operations using such homostructures.
-				<p>
-					<b>Magneto-optic and electronic characterization of quaternion state in TMD bilayers</b><br>
-					Previous experimental and theoretical work has given evidence of the existence
-					of doubly charged exciton states in strongly screened bilayers of transition metal
-					dichalcogenide (TMD) layers. These complexes are important because they can,
-					in principle, undergo Bose-Einstein condensation (BEC), in which case they
-					would also be a new type of superconductor, carrying net charge. In this paper
-					we present key electrostatic and magnetic measurements that definitively con-
-					firm the existence of these charged boson complexes. These include 1. continuous
-					control of the doping density with both positive and negative carriers, showing
-					the expected population dependence on the free carrier density, and 2. measure-
-					ment of the dependence on magnetic field, showing that time-reversal symmetry
-					is broken for these complexes, in agreement with the theoretical prediction. These
-					results imply that it is promising to look for BEC and superconductivity in this
-					system.
-				</p>
-			</article>
+			<!-- Research -->
+			<section class="wrapper style1 align-center" id="research">
+				<div class="inner">
+					<h2>Research</h2>
+					<div class="image fit">
+						<img src="images/graphene.gif" alt="" />
+					</div>
+					<div class="align-left">
+						<p><strong>High-efficiency polariton Laser</strong><br />
+						We have placed a van der Waals homostructure, formed by
+						stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a
+						multiple-quantum well structure, inside a microcavity, which facilitates the formation of
+						quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter,
+						allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers.
+						In the experiments reported here, we have observed laser emission with an ultralow threshold. The
+						threshold was approximately 59 nW/&#956;m<sup>2</sup>, with a lasing efficiency of 3.82%. These findings suggest a
+						potential for efficient laser operations using such homostructures.</p>
 
-			<!-- Here is the "Community" card. -->
-			<article id="community">
-				<h2 class="major">Community</h2>
-				<span class="image main">
+						<p><strong>Magneto-optic and electronic characterization of quaternion state in TMD bilayers</strong><br />
+						Previous experimental and theoretical work has given evidence of the existence
+						of doubly charged exciton states in strongly screened bilayers of transition metal
+						dichalcogenide (TMD) layers. These complexes are important because they can,
+						in principle, undergo Bose-Einstein condensation (BEC), in which case they
+						would also be a new type of superconductor, carrying net charge. In this paper
+						we present key electrostatic and magnetic measurements that definitively con-
+						firm the existence of these charged boson complexes. These include 1. continuous
+						control of the doping density with both positive and negative carriers, showing
+						the expected population dependence on the free carrier density, and 2. measure-
+						ment of the dependence on magnetic field, showing that time-reversal symmetry
+						is broken for these complexes, in agreement with the theoretical prediction. These
+						results imply that it is promising to look for BEC and superconductivity in this
+						system.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Community -->
+			<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in" id="community">
+				<div class="content">
+					<h2>Community</h2>
+					<p><strong>Teaching:</strong>physics lab 101</p>
+					<p><strong>Outreach:</strong> <a href="https://www.snokelab.com">Snoke Lab</a></p>
+					<p><strong>Equity &amp; Inclusion: Our lab is highly diverse with members from various backgrounds.</strong></p>
+				</div>
+				<div class="image">
 					<img src="images/group photo2_JPG.webp" alt="" />
-				</span>
-				<p>
-					<b>Teaching:physics lab 101</b>
-				</p>
-				<p>
-					<b>Outreach:</b> <a href="https://www.snokelab.com">Snoke Lab</a>
-				</p>
-				<p>
-					<b>Equity & Inclusion: Our lab is highly diverse with members from various backgrounds. </b>
-				</p>
-			</article>
+				</div>
+			</section>
 
-			<!-- Here is a the "Contact" card. -->
-			<article id="contact">
-				<h2 class="major">Contact</h2>
-				<p>
-					<b>Email:qiw74@pitt.edu</b>
-				</p>
-				<p>
-					<b>Address:Allen Hall G17</b>
-				</p>
+			<!-- Contact -->
+			<section class="wrapper style1 align-center" id="contact">
+				<div class="inner medium">
+					<h2>Contact</h2>
+					<p><strong>Email:qiw74@pitt.edu</strong><br />
+					<strong>Address:Allen Hall G17</strong></p>
+					<ul class="icons">
+						<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://github.com/QiaochuWan" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+			</section>
 
-				<!-- 	Here are the fancy icons that link to your social media.
-								These icons are rendered using Font Awesome fonts, and you can find more icons
-								here: https://fontawesome.com/icons
-							-->
-				<ul class="icons">
-					<!-- The Twitter icon -->
-					<li>
-						<!-- 	Note that you need to change the link to point to your page.
-										Replace "#" with your Twitter profile page.
-									-->
-						<a href="#" class="icon fa-twitter">
-							<span class="label">Twitter</span>
-						</a>
-					</li>
-					<!-- The Facebook icon -->
-					<li>
-						<a href="#" class="icon fa-facebook">
-							<span class="label">Facebook</span>
-						</a>
-					</li>
-					<!-- The Instagram icon -->
-					<li>
-						<a href="#" class="icon fa-instagram">
-							<span class="label">Instagram</span>
-						</a>
-					</li>
-					<!-- The GitHub icon -->
-					<li>
-						<a href="https://github.com/QiaochuWan" class="icon fa-github">
-							<span class="label">GitHub</span>
-						</a>
-					</li>
-					
-					<!-- 	We can add a new icon by searching on the Font Awesome website
-									for the correct class name and inserting it as a new list item.
+			<!-- Footer -->
+			<footer class="wrapper style1 align-center">
+				<div class="inner">
+					<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+				</div>
+			</footer>
 
-									We found "envelope" here: https://fontawesome.com/icons/envelope
-								-->
-					<li>
-									<a href="#" class="icon fa-envelope">
-										<span class="label">Email</span>
-									</a>
-					</li>
-				</ul>
-			</article>
+		</div><!-- /wrapper -->
+
+		<!-- D20 Dice Overlay -->
+		<div id="dice-overlay" role="dialog" aria-modal="true" aria-label="D20 Dice Roller">
+			<div id="dice-canvas-wrap">
+				<canvas id="dice-canvas" width="520" height="520"></canvas>
+			</div>
+			<div id="dice-result" aria-live="polite"></div>
+			<div id="dice-result-label"></div>
+			<div id="dice-hint">Click anywhere to dismiss &nbsp;&middot;&nbsp; Press Space to roll again</div>
 		</div>
 
-		<!-- This is the footer that appears at the bottom of the page -->
-		<footer id="footer">
-			<!-- 	You can change "Untitled" to your name to show everyone that
-							this is your work.
-						-->
-			<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-		</footer>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 
-	</div>
-
-	<!--	This is the background image of the site.
-				All configuration of the background is done with CSS.
-				Look in the file assets/css/main.css and search for "#bg" to
-				see how this element is styled. Look for comments pointing 
-				to where you can set a new background image.
-			-->
-	<div id="bg"></div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	
-		<!-- ===== D20 DICE ROLLER SCRIPT ===== -->
-	<script>
-		(function() {
+		<!-- D20 Dice Roller Script -->
+		<script>
+		(function () {
 			"use strict";
 
-			/* ---- Config ---- */
-			const COLORS = {
-				body:    '#2a0654',
-				bodyAlt: '#3d0878',
-				edge:    '#9333ea',
-				edgeAlt: '#c084fc',
-				text:    '#f5e6ff',
-				glow:    'rgba(167,139,250,',
-				sparkColors: ['#c084fc','#a855f7','#7c3aed','#fbbf24','#f9a8d4','#818cf8'],
-			};
+			/* ── Icosahedron Geometry ── */
+			const phi = (1 + Math.sqrt(5)) / 2;
+			const R = 185;
+			const rawVerts = [
+				[-1, phi, 0], [1, phi, 0], [-1,-phi, 0], [1,-phi, 0],
+				[ 0,-1, phi], [0,  1, phi], [0, -1,-phi], [0,  1,-phi],
+				[ phi, 0,-1], [phi,  0, 1], [-phi, 0,-1], [-phi, 0, 1]
+			].map(v => { const l = Math.hypot(...v); return v.map(x => x / l * R); });
 
-			/* ---- D20 geometry (icosahedron projected faces) ---- */
-			// 20 triangular faces of a d20, each with a number label and 3D normal
-			const FACES = [
-				{n:1},  {n:2},  {n:3},  {n:4},  {n:5},
-				{n:6},  {n:7},  {n:8},  {n:9},  {n:10},
-				{n:11}, {n:12}, {n:13}, {n:14}, {n:15},
-				{n:16}, {n:17}, {n:18}, {n:19}, {n:20},
+			const FACE_IDX = [
+				[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],
+				[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],
+				[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],
+				[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]
 			];
+			const FACE_NUM = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
 
-			/* ---- Canvas setup ---- */
+			/* ── Canvas ── */
 			const canvas = document.getElementById('dice-canvas');
 			const ctx    = canvas.getContext('2d');
-			const W = canvas.width;
-			const H = canvas.height;
-			const CX = W / 2, CY = H / 2;
-			const R = 180; // icosahedron radius
+			const CX = canvas.width / 2, CY = canvas.height / 2;
 
-			/* ---- Math helpers ---- */
-			function rotX(v, a){ return [v[0], v[1]*Math.cos(a)-v[2]*Math.sin(a), v[1]*Math.sin(a)+v[2]*Math.cos(a)]; }
-			function rotY(v, a){ return [v[0]*Math.cos(a)+v[2]*Math.sin(a), v[1], -v[0]*Math.sin(a)+v[2]*Math.cos(a)]; }
-			function rotZ(v, a){ return [v[0]*Math.cos(a)-v[1]*Math.sin(a), v[0]*Math.sin(a)+v[1]*Math.cos(a), v[2]]; }
-			function project(v){ const z = (v[2] + 3.5*R) / (4.5*R); return [CX + v[0]/z, CY - v[1]/z]; }
-			function cross(a,b){ return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; }
-			function sub(a,b)  { return [a[0]-b[0], a[1]-b[1], a[2]-b[2]]; }
-			function dot(a,b)  { return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]; }
-			function normalize(v){ const l=Math.hypot(...v); return v.map(x=>x/l); }
+			/* ── Math ── */
+			const rotX = (v,a) => [v[0], v[1]*Math.cos(a)-v[2]*Math.sin(a), v[1]*Math.sin(a)+v[2]*Math.cos(a)];
+			const rotY = (v,a) => [v[0]*Math.cos(a)+v[2]*Math.sin(a), v[1], -v[0]*Math.sin(a)+v[2]*Math.cos(a)];
+			const rotZ = (v,a) => [v[0]*Math.cos(a)-v[1]*Math.sin(a), v[0]*Math.sin(a)+v[1]*Math.cos(a), v[2]];
+			const project = v  => { const z=(v[2]+4*R)/(5*R); return [CX+v[0]/z, CY-v[1]/z]; };
+			const cross = (a,b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+			const sub   = (a,b) => [a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+			const dot   = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+			const norm  = v    => { const l=Math.hypot(...v); return v.map(x=>x/l); };
 
-			/* ---- Build icosahedron vertices ---- */
-			const phi = (1 + Math.sqrt(5)) / 2;
-			const rawVerts = [
-				[-1, phi, 0],[ 1, phi, 0],[-1,-phi, 0],[ 1,-phi, 0],
-				[ 0,-1, phi],[ 0, 1, phi],[ 0,-1,-phi],[ 0, 1,-phi],
-				[ phi, 0,-1],[ phi, 0, 1],[-phi, 0,-1],[-phi, 0, 1]
-			].map(v => normalize(v).map(x => x * R));
+			/* ── State ── */
+			let rx=0.3,ry=0.5,rz=0.1;
+			let vx=0,vy=0,vz=0;
+			let phase='idle'; // idle|spin|settle|done
+			let frame=0,spinDur=0,settleCnt=0;
+			let result=null,shimmer=0,animId=null,busy=false;
 
-			/* ---- 20 triangular face definitions ---- */
-			const FACE_INDICES = [
-				[0,11, 5],[0, 5, 1],[0, 1, 7],[0, 7,10],[0,10,11],
-				[1, 5, 9],[5,11, 4],[11,10, 2],[10, 7, 6],[7, 1, 8],
-				[3, 9, 4],[3, 4, 2],[3, 2, 6],[3, 6, 8],[3, 8, 9],
-				[4, 9, 5],[2, 4,11],[6, 2,10],[8, 6, 7],[9, 8, 1]
-			];
-
-			/* ---- State ---- */
-			let rolling = false;
-			let animId  = null;
-			let rx = 0.3, ry = 0.5, rz = 0.1;
-			let vx = 0,   vy = 0,   vz = 0;
-			let rollResult = null;
-			let targetFaceIdx = 0;
-			let rollPhase = 'idle'; // idle | spinning | settling | done
-			let frameCount = 0;
-			let spinDuration = 0;
-			let settleFrames = 0;
-			let shimmerT = 0;
-
-			/* ---- Drawing ---- */
-			function computeFaces(rxA, ryA, rzA) {
-				return FACE_INDICES.map((fi, i) => {
-					const va = rawVerts[fi[0]], vb = rawVerts[fi[1]], vc = rawVerts[fi[2]];
-					const rot = v => rotZ(rotY(rotX(v, rxA), ryA), rzA);
-					const ra = rot(va), rb = rot(vb), rc = rot(vc);
-					const n = normalize(cross(sub(rb,ra), sub(rc,ra)));
-					const brightness = Math.max(0, dot(n, [0.5,0.8,0.6]));
-					const pa = project(ra), pb = project(rb), pc = project(rc);
-					const cx3d = (ra[0]+rb[0]+rc[0])/3;
-					const cy3d = (ra[1]+rb[1]+rc[1])/3;
-					const cz3d = (ra[2]+rb[2]+rc[2])/3;
-					return {
-						verts: [pa,pb,pc],
-						faceNum: FACES[i].n,
-						brightness,
-						facing: n[2] > 0,
-						depth: cz3d,
-						centerProj: project([cx3d, cy3d, cz3d]),
-					};
-				}).sort((a,b) => a.depth - b.depth);
-			}
-
+			/* ── Draw ── */
 			function drawFrame() {
-				ctx.clearRect(0, 0, W, H);
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				const bg=ctx.createRadialGradient(CX,CY,R*0.4,CX,CY,R*1.4);
+				bg.addColorStop(0,'rgba(120,50,210,0.15)');
+				bg.addColorStop(1,'rgba(0,0,0,0)');
+				ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
 
-				// Outer glow halo
-				const grad = ctx.createRadialGradient(CX, CY, R*0.5, CX, CY, R*1.35);
-				grad.addColorStop(0, COLORS.glow + '0.18)');
-				grad.addColorStop(1, COLORS.glow + '0)');
-				ctx.fillStyle = grad;
-				ctx.fillRect(0, 0, W, H);
+				const rot = v => rotZ(rotY(rotX(v,rx),ry),rz);
+				const verts = rawVerts.map(rot);
 
-				const faces = computeFaces(rx, ry, rz);
-				shimmerT += 0.04;
+				const faces = FACE_IDX.map((fi,i)=>{
+					const va=verts[fi[0]],vb=verts[fi[1]],vc=verts[fi[2]];
+					const n3d=norm(cross(sub(vb,va),sub(vc,va)));
+					const lit=Math.max(0,dot(n3d,norm([0.5,0.8,0.5])));
+					const depth=(va[2]+vb[2]+vc[2])/3;
+					const px=[project(va),project(vb),project(vc)];
+					const cx2d=(px[0][0]+px[1][0]+px[2][0])/3;
+					const cy2d=(px[0][1]+px[1][1]+px[2][1])/3;
+					return {px,faceNum:FACE_NUM[i],lit,depth,facing:n3d[2]>0,cx2d,cy2d};
+				}).sort((a,b)=>a.depth-b.depth);
 
-				faces.forEach(face => {
-					const [p0, p1, p2] = face.verts;
+				shimmer+=0.035;
+				faces.forEach(f=>{
 					ctx.beginPath();
-					ctx.moveTo(p0[0], p0[1]);
-					ctx.lineTo(p1[0], p1[1]);
-					ctx.lineTo(p2[0], p2[1]);
+					ctx.moveTo(f.px[0][0],f.px[0][1]);
+					ctx.lineTo(f.px[1][0],f.px[1][1]);
+					ctx.lineTo(f.px[2][0],f.px[2][1]);
 					ctx.closePath();
-
-					if (!face.facing) {
-						// back face — dark silhouette
-						ctx.fillStyle = '#0d0026';
-						ctx.fill();
-					} else {
-						// Gradient fill
-						const gf = ctx.createLinearGradient(p0[0],p0[1],p2[0],p2[1]);
-						const b = face.brightness;
-						const shimmer = rollPhase === 'done' ? 0.15*Math.sin(shimmerT + face.faceNum) : 0;
-						const lit = Math.min(1, b + shimmer);
-						const r1 = Math.round(42  + lit*90);
-						const g1 = Math.round(6   + lit*30);
-						const b1 = Math.round(84  + lit*130);
-						const r2 = Math.round(26  + lit*60);
-						const g2 = Math.round(3   + lit*18);
-						const b2 = Math.round(50  + lit*100);
-						gf.addColorStop(0, `rgb(${r1},${g1},${b1})`);
-						gf.addColorStop(1, `rgb(${r2},${g2},${b2})`);
-						ctx.fillStyle = gf;
-						ctx.fill();
-
-						// Edge
-						ctx.strokeStyle = lit > 0.5 ? COLORS.edgeAlt : COLORS.edge;
-						ctx.lineWidth = 1.5;
-						ctx.stroke();
-
-						// Face number — only on front-facing faces
-						const fc = face.centerProj;
-						const avgZ = (faces.find(f => f.faceNum === face.faceNum) || face).depth;
+					if(!f.facing){ctx.fillStyle='#0a001a';ctx.fill();return;}
+					const g=ctx.createLinearGradient(f.px[0][0],f.px[0][1],f.px[2][0],f.px[2][1]);
+					const sh=phase==='done'?0.12*Math.sin(shimmer+f.faceNum*0.7):0;
+					const b=Math.min(1,f.lit+sh);
+					g.addColorStop(0,`rgb(${Math.round(30+b*90)},${Math.round(5+b*25)},${Math.round(70+b*130)})`);
+					g.addColorStop(1,`rgb(${Math.round(18+b*55)},${Math.round(3+b*15)},${Math.round(45+b*100)})`);
+					ctx.fillStyle=g; ctx.fill();
+					ctx.strokeStyle=b>0.45?'#c084fc':'#7c3aed';
+					ctx.lineWidth=1.5; ctx.stroke();
+					if(f.lit>0.08){
 						ctx.save();
-						ctx.translate(fc[0], fc[1]);
-						const fontSize = Math.round(20 + lit * 8);
-						ctx.font = `bold ${fontSize}px Georgia, serif`;
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'middle';
-						// Number shadow / glow
-						if (rollPhase === 'done' && face.faceNum === rollResult) {
-							ctx.shadowColor = '#fbbf24';
-							ctx.shadowBlur  = 22;
-							ctx.fillStyle   = '#fff';
-						} else {
-							ctx.shadowColor = '#7c3aed';
-							ctx.shadowBlur  = 8;
-							ctx.fillStyle   = COLORS.text;
-						}
-						ctx.globalAlpha = Math.min(1, (lit - 0.05) * 3);
-						ctx.fillText(face.faceNum, 0, 0);
+						ctx.translate(f.cx2d,f.cy2d);
+						const isRes=phase==='done'&&f.faceNum===result;
+						ctx.font=`bold ${Math.round(18+f.lit*10)}px Georgia,serif`;
+						ctx.textAlign='center'; ctx.textBaseline='middle';
+						ctx.shadowColor=isRes?'#fbbf24':'#9333ea';
+						ctx.shadowBlur=isRes?24:8;
+						ctx.fillStyle=isRes?'#ffffff':'#f0e0ff';
+						ctx.globalAlpha=Math.min(1,(f.lit-0.08)*3.5);
+						ctx.fillText(f.faceNum,0,0);
 						ctx.restore();
 					}
 				});
-
-				// Specular highlight blob
-				const hl = ctx.createRadialGradient(CX - R*0.3, CY - R*0.3, 0, CX - R*0.3, CY - R*0.3, R*0.55);
-				hl.addColorStop(0, 'rgba(255,255,255,0.12)');
-				hl.addColorStop(1, 'rgba(255,255,255,0)');
-				ctx.fillStyle = hl;
-				ctx.fillRect(0, 0, W, H);
+				const sp=ctx.createRadialGradient(CX-R*0.32,CY-R*0.32,0,CX-R*0.32,CY-R*0.32,R*0.55);
+				sp.addColorStop(0,'rgba(255,255,255,0.11)');
+				sp.addColorStop(1,'rgba(255,255,255,0)');
+				ctx.fillStyle=sp; ctx.fillRect(0,0,canvas.width,canvas.height);
 			}
 
-			/* ---- Animation loop ---- */
-			function animate() {
-				frameCount++;
-
-				if (rollPhase === 'spinning') {
-					// Fast chaotic spin
-					const t = frameCount / spinDuration;
-					const speed = 0.38 * (1 - t * 0.6);
-					rx += vx * speed;
-					ry += vy * speed;
-					rz += vz * speed;
-
-					if (frameCount >= spinDuration) {
-						rollPhase = 'settling';
-						settleFrames = 0;
-					}
-				} else if (rollPhase === 'settling') {
-					// Ease into upright facing face
-					settleFrames++;
-					const ease = Math.min(1, settleFrames / 35);
-					// Nudge rotation toward target face's "top" orientation gently
-					rx *= (1 - ease * 0.06);
-					ry *= (1 - ease * 0.04);
-					rz *= (1 - ease * 0.04);
-
-					if (settleFrames >= 50) {
-						rollPhase = 'done';
-						showResult();
-					}
-				} else if (rollPhase === 'done') {
-					// Gentle idle rotation shimmer
-					rx += 0.003 * Math.sin(frameCount * 0.04);
-					ry += 0.006;
-					rz += 0.002 * Math.cos(frameCount * 0.05);
+			/* ── Tick ── */
+			function tick(){
+				frame++;
+				if(phase==='spin'){
+					const spd=0.40*(1-(frame/spinDur)*0.55);
+					rx+=vx*spd; ry+=vy*spd; rz+=vz*spd;
+					if(frame>=spinDur){phase='settle';settleCnt=0;}
+				}else if(phase==='settle'){
+					settleCnt++;
+					const ease=Math.min(1,settleCnt/40);
+					rx*=(1-ease*0.06); ry*=(1-ease*0.05); rz*=(1-ease*0.04);
+					if(settleCnt>=55){phase='done';showResult();}
+				}else if(phase==='done'){
+					rx+=0.0025*Math.sin(frame*0.035);
+					ry+=0.005;
+					rz+=0.002*Math.cos(frame*0.045);
 				}
-
 				drawFrame();
-				animId = requestAnimationFrame(animate);
+				animId=requestAnimationFrame(tick);
 			}
 
-			/* ---- Start roll ---- */
-			function startRoll() {
-				if (rolling) return;
-				rolling = true;
-				rollResult = null;
-				rollPhase  = 'spinning';
-				frameCount = 0;
-				spinDuration = 80 + Math.floor(Math.random() * 40); // 80-120 frames
-
-				// Random violent angular velocities
-				vx = 3.5 + Math.random() * 4;
-				vy = 2.5 + Math.random() * 4;
-				vz = 1.8 + Math.random() * 3;
-				if (Math.random() < 0.5) vx *= -1;
-				if (Math.random() < 0.5) vy *= -1;
-
-				// Pick result
-				rollResult = Math.floor(Math.random() * 20) + 1;
-
-				// Hide old result
-				const resEl    = document.getElementById('dice-result');
-				const labelEl  = document.getElementById('dice-result-label');
-				const dismissEl= document.getElementById('dice-dismiss');
-				resEl.textContent = '';
-				resEl.className   = '';
-				labelEl.textContent = '';
-				labelEl.className   = '';
-				dismissEl.className = '';
-
-				// Screen shake
-				document.getElementById('dice-canvas-wrap').classList.add('dice-shake');
-				setTimeout(() => document.getElementById('dice-canvas-wrap').classList.remove('dice-shake'), 500);
-
-				// Spawn sparks
-				spawnSparks();
-
-				if (!animId) { animate(); }
+			/* ── Roll ── */
+			function doRoll(){
+				if(busy)return;
+				busy=true; phase='spin'; frame=0;
+				spinDur=75+Math.floor(Math.random()*50);
+				result=Math.floor(Math.random()*20)+1;
+				vx=(3+Math.random()*4)*(Math.random()<.5?1:-1);
+				vy=(2.5+Math.random()*4)*(Math.random()<.5?1:-1);
+				vz=1.5+Math.random()*3;
+				['dice-result','dice-result-label','dice-hint'].forEach(id=>{
+					const el=document.getElementById(id);
+					el.textContent=''; el.className='';
+				});
+				const wrap=document.getElementById('dice-canvas-wrap');
+				wrap.classList.remove('shaking');
+				void wrap.offsetWidth;
+				wrap.classList.add('shaking');
+				setTimeout(()=>wrap.classList.remove('shaking'),500);
+				spawnSparks(false);
+				if(!animId)tick();
 			}
 
-			/* ---- Show result ---- */
-			function showResult() {
-				const resEl    = document.getElementById('dice-result');
-				const labelEl  = document.getElementById('dice-result-label');
-				const dismissEl= document.getElementById('dice-dismiss');
-
-				resEl.textContent = rollResult;
-				resEl.classList.add('show');
-
-				let label = '';
-				let cls   = '';
-				if (rollResult === 20) { label = '✨ Natural 20 — Critical Hit!'; cls = 'crit'; spawnSparks(true); }
-				else if (rollResult === 1)  { label = '💀 Critical Fail!';               cls = 'fail'; }
-				else if (rollResult >= 15)  { label = 'Great Roll!';                     cls = 'crit'; }
-				else if (rollResult <= 5)   { label = 'Rough luck...';                   cls = 'fail'; }
-
-				if (label) {
-					labelEl.textContent = label;
-					labelEl.classList.add('show', cls);
-				}
-
-				dismissEl.classList.add('show');
-				rolling = false;
+			/* ── Show result ── */
+			function showResult(){
+				const resEl=document.getElementById('dice-result');
+				const lblEl=document.getElementById('dice-result-label');
+				const hintEl=document.getElementById('dice-hint');
+				resEl.textContent=result; resEl.classList.add('show');
+				let lbl='',cls='';
+				if(result===20)     {lbl='✨ Natural 20 — Critical Hit!';cls='crit';spawnSparks(true);}
+				else if(result===1) {lbl='💀 Critical Fail!';cls='fail';}
+				else if(result>=15) {lbl='Great Roll!';cls='crit';}
+				else if(result<=5)  {lbl='Rough luck…';cls='fail';}
+				if(lbl){lblEl.textContent=lbl;lblEl.classList.add('show',cls);}
+				hintEl.classList.add('show');
+				busy=false;
 			}
 
-			/* ---- Sparks ---- */
-			function spawnSparks(burst = false) {
-				const wrap  = document.getElementById('dice-canvas-wrap');
-				const count = burst ? 28 : 14;
-				for (let i = 0; i < count; i++) {
-					setTimeout(() => {
-						const s    = document.createElement('div');
-						s.className = 'spark';
-						const size = 5 + Math.random() * 9;
-						const angle = Math.random() * Math.PI * 2;
-						const dist  = 60 + Math.random() * 120;
-						const color = COLORS.sparkColors[Math.floor(Math.random() * COLORS.sparkColors.length)];
-						s.style.cssText = `
-							width:${size}px;height:${size}px;
-							background:${color};
-							left:${130 - size/2 + (Math.random()-0.5)*60}px;
-							top:${130 - size/2 + (Math.random()-0.5)*60}px;
-							--tx:${Math.cos(angle)*dist}px;
-							--ty:${Math.sin(angle)*dist}px;
-							box-shadow:0 0 6px ${color};
-						`;
-						wrap.appendChild(s);
-						s.addEventListener('animationend', () => s.remove());
-					}, i * (burst ? 30 : 50));
+			/* ── Sparks ── */
+			const COLS=['#c084fc','#a855f7','#7c3aed','#fbbf24','#f9a8d4','#818cf8','#fff'];
+			function spawnSparks(burst){
+				const wrap=document.getElementById('dice-canvas-wrap');
+				const n=burst?30:16;
+				for(let i=0;i<n;i++){
+					setTimeout(()=>{
+						const el=document.createElement('div');
+						el.className='spark';
+						const sz=5+Math.random()*8;
+						const ang=Math.random()*Math.PI*2;
+						const d=55+Math.random()*110;
+						const col=COLS[Math.floor(Math.random()*COLS.length)];
+						el.style.cssText=`width:${sz}px;height:${sz}px;background:${col};`+
+							`left:${130-sz/2+(Math.random()-.5)*50}px;`+
+							`top:${130-sz/2+(Math.random()-.5)*50}px;`+
+							`--tx:${Math.cos(ang)*d}px;--ty:${Math.sin(ang)*d}px;`+
+							`box-shadow:0 0 5px ${col};`;
+						wrap.appendChild(el);
+						el.addEventListener('animationend',()=>el.remove());
+					},i*(burst?25:45));
 				}
 			}
 
-			/* ---- Overlay open/close ---- */
-			const overlay  = document.getElementById('dice-overlay');
-			const rollBtn  = document.getElementById('roll-btn');
-
-			rollBtn.addEventListener('click', () => {
+			/* ── Overlay controls ── */
+			const overlay=document.getElementById('dice-overlay');
+			document.getElementById('roll-btn').addEventListener('click',()=>{
 				overlay.classList.add('active');
-				// Start rolling immediately
-				setTimeout(() => startRoll(), 80);
+				setTimeout(doRoll,80);
 			});
-
-			overlay.addEventListener('click', () => {
-				if (rolling) return; // don't close mid-roll
+			overlay.addEventListener('click',()=>{
+				if(busy)return;
 				overlay.classList.remove('active');
-				if (animId) { cancelAnimationFrame(animId); animId = null; }
-				rollPhase = 'idle';
+				if(animId){cancelAnimationFrame(animId);animId=null;}
+				phase='idle';
 			});
-
-			// Prevent click-through from canvas
-			canvas.addEventListener('click', e => e.stopPropagation());
-
-			// Keyboard: Escape to close, Space/Enter to roll again
-			document.addEventListener('keydown', e => {
-				if (!overlay.classList.contains('active')) return;
-				if (e.key === 'Escape') { overlay.click(); }
-				if ((e.key === ' ' || e.key === 'Enter') && !rolling) { startRoll(); }
+			document.getElementById('dice-canvas-wrap').addEventListener('click',e=>e.stopPropagation());
+			document.addEventListener('keydown',e=>{
+				if(!overlay.classList.contains('active'))return;
+				if(e.key==='Escape')overlay.click();
+				if((e.key===' '||e.key==='Enter')&&!busy)doRoll();
 			});
 		})();
-	</script>
+		</script>
 
-</body>
-google-site-verification: googlec29820ed6e35c01f.html	
+	</body>
 </html>
-
-
-
-
