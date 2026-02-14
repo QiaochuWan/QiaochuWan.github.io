@@ -133,120 +133,226 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Wrapper -->
-		<div id="wrapper" class="divided">
+	<!-- This "div" wraps around all of our content and just changes how things are layed out -->
+	<div id="wrapper">
 
-			<!-- Banner (Intro) -->
-			<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
-				<div class="content">
-					<h1>Qiaochu Wan</h1>
-					<p class="major">Ph.D. in Physics <br />
-					University of Pittsburgh</p>
-					<ul class="actions stacked">
-						<li><a href="images/CV.pdf" class="button big wide smooth-scroll-middle">Curriculum Vitae</a></li>
-						<li><a href="images/qiaochuwan_resume.pdf" class="button big wide smooth-scroll-middle">Resume</a></li>
-					</ul>
-				</div>
-				<div class="image">
-					<img src="images/qiaochuwan.webp" alt="" />
-				</div>
-			</section>
+		<!-- This is where the content that appears on page load exists -->
+		<header id="header">
+			<!-- This is the main content of the front page -->
+			<div class="content">
+				<div class="inner">
+					<!-- Here is a heading where you can put your name -->
+					<h1>
+						Qiaochu Wan
+					</h1>
+					<!-- 	Here is an image where you can put a picture of you. 
+									You can change the width and height attributes below to change how large
+									your image is.
 
-			<!-- About Me -->
-			<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="about">
-				<div class="content">
-					<h2>About Me</h2>
-					<p><strong>Education: Shanghaitech University, University of California, Berkeley, University of
+									Try adding "border-radius: 50%;" to the style attribute.
+								-->
+					<img src="images/qiaochuwan.webp" style="width:280px; height:280px; object-fit: cover;">
+					<!-- 	Here is a paragraph where you can put your position and institution, or
+									a short line about yourself.
+								-->
+					<p>
+						Ph.D. in Physics <br> University of Pittsburgh
+					</p>
+					<!-- Here is a paragraph where you can put a link to your CV -->
+					<p>
+						<!-- Note you will want to change where this points to! -->
+						<a href="images/CV.pdf" target="_blank">Curriculum Vitae</a>
+					</p>
+		            <p>
+						<!-- Note you will want to change where this points to! -->
+						<a href="images/qiaochuwan_resume.pdf" target="_blank">Resume</a>
+					</p>
+				</div>
+			</div>
+			<!-- This is the navigation menu -->
+			<nav>
+				<!-- This element makes an "Unordered List" -->
+				<ul>
+					<!-- This is a "List Item" -->
+					<li>
+						<!-- 	Note that this links to #about, which will move the page to wherever
+										the element with the id "about" exists.
+									-->
+						<a href="#about">About Me</a>
+					</li>
+					<li>
+						<a href="#research">Research</a>
+					</li>
+					<li>
+						<a href="#community">Community</a>
+					</li>
+					<li>
+						<a href="#contact">Contact</a>
+					</li>
+					<!-- 	You can add another button to your navigation menu by adding
+									another List Item with a link inside of it.
+								-->
+					<!-- <li>
+									<a href="images/Astronomy.jpg">My CV</a>
+								</li> -->
+				</ul>
+			</nav>
+		</header>
+
+		<div id="main">
+			<!-- 	Here is the "About Me" card. Note it has the id "about", which the previous 
+							button links to.
+						-->
+			<article id="about">
+				<h2 class="major">About Me</h2>
+				<!-- Here is an image that you can customize for this page -->
+    			<p><strong>Education: Shanghaitech University, University of California, Berkeley, University of
 					Pittsburgh</strong></p>
-					<p><strong>Research Interests:2D material,excitonic structure, polariton, light-matter interaction</strong></p>
-					<p><strong>Publications:</strong> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&amp;hl=en">Google
+				<p><strong>Research Interests:2D material,excitonic structure, polariton, light-matter interaction</strong></p>
+				<p><strong>Publications:</strong> <a href="https://scholar.google.com/citations?user=pURY-2IAAAAJ&amp;hl=en">Google
 					scholar link</a></p>
 
 					<!-- ★ D20 DICE ROLLER BUTTON ★ -->
-					<button class="dice-roll-btn" id="roll-btn" aria-label="Roll a D20 dice">
-						<span aria-hidden="true">⬡</span>
-						Roll a D20
-					</button>
+				<button class="dice-roll-btn" id="roll-btn" aria-label="Roll a D20 dice">
+					<span aria-hidden="true">⬡</span>
+					Roll a D20
+				</button>
 				</div>
 				<div class="image">
 					<img src="images/TRPG2.jpg" alt="" />
 				</div>
-			</section>
+			</article>
 
-			<!-- Research -->
-			<section class="wrapper style1 align-center" id="research">
-				<div class="inner">
-					<h2>Research</h2>
-					<div class="image fit">
-						<img src="images/graphene.gif" alt="" />
-					</div>
-					<div class="align-left">
-						<p><strong>High-efficiency polariton Laser</strong><br />
-						We have placed a van der Waals homostructure, formed by
-						stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a
-						multiple-quantum well structure, inside a microcavity, which facilitates the formation of
-						quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter,
-						allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers.
-						In the experiments reported here, we have observed laser emission with an ultralow threshold. The
-						threshold was approximately 59 nW/&#956;m<sup>2</sup>, with a lasing efficiency of 3.82%. These findings suggest a
-						potential for efficient laser operations using such homostructures.</p>
+		
+			<!-- Here is the "Research" card. -->
+			<article id="research">
+				<h2 class="major">Research</h2>
+				<span class="image main">
+					<img src="images/graphene.gif" alt="" />
+				</span>
+				<p>
+					<!-- 	A <br> tag puts in a break so that the text that follows it displays on
+									the next line.
+								-->
+					<b> High-efficiency polariton Laser</b><br>We have placed a van der Waals homostructure, formed by
+					stacking three two-dimensional layers of WS2 separated by insulating hBN, similar to a
+					multiple-quantum well structure, inside a microcavity, which facilitates the formation of
+					quasiparticles known as exciton-polaritons. The polaritons are a combination of light and matter,
+					allowing laser emission to be enhanced by nonlinear scattering, as seen in prior polariton lasers.
+					In the experiments reported here, we have observed laser emission with an ultralow threshold. The
+					threshold was approximately 59 nW/μm2, with a lasing efficiency of 3.82%. These findings suggest a
+					potential for efficient laser operations using such homostructures.
+				<p>
+					<b>Magneto-optic and electronic characterization of quaternion state in TMD bilayers</b><br>
+					Previous experimental and theoretical work has given evidence of the existence
+					of doubly charged exciton states in strongly screened bilayers of transition metal
+					dichalcogenide (TMD) layers. These complexes are important because they can,
+					in principle, undergo Bose-Einstein condensation (BEC), in which case they
+					would also be a new type of superconductor, carrying net charge. In this paper
+					we present key electrostatic and magnetic measurements that definitively con-
+					firm the existence of these charged boson complexes. These include 1. continuous
+					control of the doping density with both positive and negative carriers, showing
+					the expected population dependence on the free carrier density, and 2. measure-
+					ment of the dependence on magnetic field, showing that time-reversal symmetry
+					is broken for these complexes, in agreement with the theoretical prediction. These
+					results imply that it is promising to look for BEC and superconductivity in this
+					system.
+				</p>
+			</article>
 
-						<p><strong>Magneto-optic and electronic characterization of quaternion state in TMD bilayers</strong><br />
-						Previous experimental and theoretical work has given evidence of the existence
-						of doubly charged exciton states in strongly screened bilayers of transition metal
-						dichalcogenide (TMD) layers. These complexes are important because they can,
-						in principle, undergo Bose-Einstein condensation (BEC), in which case they
-						would also be a new type of superconductor, carrying net charge. In this paper
-						we present key electrostatic and magnetic measurements that definitively con-
-						firm the existence of these charged boson complexes. These include 1. continuous
-						control of the doping density with both positive and negative carriers, showing
-						the expected population dependence on the free carrier density, and 2. measure-
-						ment of the dependence on magnetic field, showing that time-reversal symmetry
-						is broken for these complexes, in agreement with the theoretical prediction. These
-						results imply that it is promising to look for BEC and superconductivity in this
-						system.</p>
-					</div>
-				</div>
-			</section>
-
-			<!-- Community -->
-			<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in" id="community">
-				<div class="content">
-					<h2>Community</h2>
-					<p><strong>Teaching:</strong>physics lab 101</p>
-					<p><strong>Outreach:</strong> <a href="https://www.snokelab.com">Snoke Lab</a></p>
-					<p><strong>Equity &amp; Inclusion: Our lab is highly diverse with members from various backgrounds.</strong></p>
-				</div>
-				<div class="image">
+			<!-- Here is the "Community" card. -->
+			<article id="community">
+				<h2 class="major">Community</h2>
+				<span class="image main">
 					<img src="images/group photo2_JPG.webp" alt="" />
-				</div>
-			</section>
+				</span>
+				<p>
+					<b>Teaching:physics lab 101</b>
+				</p>
+				<p>
+					<b>Outreach:</b> <a href="https://www.snokelab.com">Snoke Lab</a>
+				</p>
+				<p>
+					<b>Equity & Inclusion: Our lab is highly diverse with members from various backgrounds. </b>
+				</p>
+			</article>
 
-			<!-- Contact -->
-			<section class="wrapper style1 align-center" id="contact">
-				<div class="inner medium">
-					<h2>Contact</h2>
-					<p><strong>Email:qiw74@pitt.edu</strong><br />
-					<strong>Address:Allen Hall G17</strong></p>
-					<ul class="icons">
-						<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="https://github.com/QiaochuWan" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-						<li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-				</div>
-			</section>
+			<!-- Here is a the "Contact" card. -->
+			<article id="contact">
+				<h2 class="major">Contact</h2>
+				<p>
+					<b>Email:qiw74@pitt.edu</b>
+				</p>
+				<p>
+					<b>Address:Allen Hall G17</b>
+				</p>
 
-			<!-- Footer -->
-			<footer class="wrapper style1 align-center">
-				<div class="inner">
-					<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-				</div>
-			</footer>
+				<!-- 	Here are the fancy icons that link to your social media.
+								These icons are rendered using Font Awesome fonts, and you can find more icons
+								here: https://fontawesome.com/icons
+							-->
+				<ul class="icons">
+					<!-- The Twitter icon -->
+					<li>
+						<!-- 	Note that you need to change the link to point to your page.
+										Replace "#" with your Twitter profile page.
+									-->
+						<a href="#" class="icon fa-twitter">
+							<span class="label">Twitter</span>
+						</a>
+					</li>
+					<!-- The Facebook icon -->
+					<li>
+						<a href="#" class="icon fa-facebook">
+							<span class="label">Facebook</span>
+						</a>
+					</li>
+					<!-- The Instagram icon -->
+					<li>
+						<a href="#" class="icon fa-instagram">
+							<span class="label">Instagram</span>
+						</a>
+					</li>
+					<!-- The GitHub icon -->
+					<li>
+						<a href="https://github.com/QiaochuWan" class="icon fa-github">
+							<span class="label">GitHub</span>
+						</a>
+					</li>
+					
+					<!-- 	We can add a new icon by searching on the Font Awesome website
+									for the correct class name and inserting it as a new list item.
 
-		</div><!-- /wrapper -->
+									We found "envelope" here: https://fontawesome.com/icons/envelope
+								-->
+					<li>
+									<a href="#" class="icon fa-envelope">
+										<span class="label">Email</span>
+									</a>
+					</li>
+				</ul>
+			</article>
+		</div>
 
+		<!-- This is the footer that appears at the bottom of the page -->
+		<footer id="footer">
+			<!-- 	You can change "Untitled" to your name to show everyone that
+							this is your work.
+						-->
+			<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+		</footer>
+
+	</div>
+
+	<!--	This is the background image of the site.
+				All configuration of the background is done with CSS.
+				Look in the file assets/css/main.css and search for "#bg" to
+				see how this element is styled. Look for comments pointing 
+				to where you can set a new background image.
+			-->
+	<div id="bg"></div>
+
+	
 		<!-- D20 Dice Overlay -->
 		<div id="dice-overlay" role="dialog" aria-modal="true" aria-label="D20 Dice Roller">
 			<div id="dice-canvas-wrap">
