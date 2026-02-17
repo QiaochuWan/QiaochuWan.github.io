@@ -416,12 +416,30 @@
 			const dot   = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 			const norm  = v    => { const l=Math.hypot(...v); return v.map(x=>x/l); };
 
+			/* ── Angles to show result face on top ── */
+			function anglesForTopFace(faceIdx) {
+				const fi = FACE_IDX[faceIdx];
+				const va = rawVerts[fi[0]], vb = rawVerts[fi[1]], vc = rawVerts[fi[2]];
+				const n = norm(cross(sub(vb, va), sub(vc, va)));
+				const [nx, ny, nz] = n;
+				const rx = Math.atan2(ny, nz || 1e-6);
+				const ry = -Math.asin(Math.max(-1, Math.min(1, nx)));
+				const rz = (Math.random() - 0.5) * 0.5;
+				return { rx, ry, rz };
+			}
+			function lerpAngle(a, b, t) {
+				let d = ((b - a) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+				if (d > Math.PI) d -= 2 * Math.PI;
+				return a + d * t;
+			}
+
 			/* ── State ── */
 			let rx=0.3,ry=0.5,rz=0.1;
 			let vx=0,vy=0,vz=0;
 			let phase='idle'; // idle|spin|settle|done
 			let frame=0,spinDur=0,settleCnt=0;
 			let result=null,shimmer=0,animId=null,busy=false;
+			let targetRx=0,targetRy=0,targetRz=0;
 
 			/* ── Draw ── */
 			function drawFrame() {
@@ -487,12 +505,20 @@
 				if(phase==='spin'){
 					const spd=0.40*(1-(frame/spinDur)*0.55);
 					rx+=vx*spd; ry+=vy*spd; rz+=vz*spd;
-					if(frame>=spinDur){phase='settle';settleCnt=0;}
+					if(frame>=spinDur){
+					phase='settle'; settleCnt=0;
+					const faceIdx = FACE_NUM.indexOf(result);
+					const t = anglesForTopFace(faceIdx);
+					targetRx=t.rx; targetRy=t.ry; targetRz=t.rz;
+				}
 				}else if(phase==='settle'){
 					settleCnt++;
-					const ease=Math.min(1,settleCnt/40);
-					rx*=(1-ease*0.06); ry*=(1-ease*0.05); rz*=(1-ease*0.04);
-					if(settleCnt>=55){phase='done';showResult();}
+					const ease = Math.min(1, settleCnt / 45);
+					const t = 1 - Math.pow(1 - ease, 2.2);
+					rx = lerpAngle(rx, targetRx, t);
+					ry = lerpAngle(ry, targetRy, t);
+					rz = lerpAngle(rz, targetRz, t);
+					if(settleCnt>=50){phase='done';showResult();}
 				}else if(phase==='done'){
 					rx+=0.0025*Math.sin(frame*0.035);
 					ry+=0.005;
