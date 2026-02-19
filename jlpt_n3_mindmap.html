@@ -1,0 +1,2839 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT N3 日语学习思维导图</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --red: #c8102e;
+    --red-glow: rgba(200,16,46,0.3);
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --white: #f0ede8;
+    --muted: #888;
+    --teal: #2a9d8f;
+    --purple: #7b5ea7;
+    --blue: #3a86ff;
+    --orange: #f4845f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Noto Serif SC', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(200,16,46,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(42,157,143,0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Vertical text decoration */
+  .kanji-deco {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: rgba(201,168,76,0.15);
+    letter-spacing: 8px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .kanji-deco2 {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: rgba(200,16,46,0.12);
+    letter-spacing: 8px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .header-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 4px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  h1 span {
+    color: var(--red);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  /* Legend */
+  .legend {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .legend-item:hover { color: var(--white); }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Main content */
+  .content {
+    position: relative;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* Section grid */
+  .section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .card-header:hover {
+    border-bottom-color: var(--border);
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .card-title-wrap { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .card-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  .card-toggle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.3s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .card.open .card-toggle {
+    transform: rotate(45deg);
+  }
+
+  .card-body {
+    display: none;
+    padding: 16px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .card.open .card-body { display: block; }
+
+  /* Subcategory */
+  .subcat {
+    margin-bottom: 16px;
+  }
+
+  .subcat:last-child { margin-bottom: 0; }
+
+  .subcat-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subcat-title span {
+    font-size: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* Grammar items */
+  .grammar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .grammar-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .grammar-item:hover {
+    border-color: currentColor;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .grammar-item-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .grammar-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .grammar-cn {
+    font-size: 12px;
+    color: var(--white);
+    flex: 1;
+  }
+
+  .grammar-detail {
+    display: none;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .grammar-item.open .grammar-detail {
+    display: block;
+  }
+
+  .grammar-example {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .grammar-example .jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: rgba(201,168,76,0.8);
+    display: block;
+  }
+
+  .grammar-example .cn {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  /* Vocab tags */
+  .vocab-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .vocab-tag {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .vocab-tag:hover {
+    transform: scale(1.05);
+    border-color: currentColor;
+  }
+
+  .vocab-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: var(--gold);
+  }
+
+  .vocab-cn {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .vocab-read {
+    font-size: 9px;
+    color: rgba(201,168,76,0.5);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  /* Color themes per card */
+  .theme-red .card-icon { background: rgba(200,16,46,0.15); color: #e85c7a; }
+  .theme-red .card-header { border-left: 3px solid var(--red); }
+  .theme-red .subcat-title { color: #e85c7a; }
+  .theme-red .grammar-jp { color: #e85c7a; }
+  .theme-red .vocab-jp { color: #e85c7a; }
+  .theme-red .grammar-item:hover { border-color: #e85c7a; }
+  .theme-red .vocab-tag:hover { border-color: #e85c7a; }
+
+  .theme-gold .card-icon { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .theme-gold .card-header { border-left: 3px solid var(--gold); }
+  .theme-gold .subcat-title { color: var(--gold); }
+
+  .theme-teal .card-icon { background: rgba(42,157,143,0.15); color: #4ecdc4; }
+  .theme-teal .card-header { border-left: 3px solid var(--teal); }
+  .theme-teal .subcat-title { color: #4ecdc4; }
+  .theme-teal .grammar-jp { color: #4ecdc4; }
+  .theme-teal .vocab-jp { color: #4ecdc4; }
+  .theme-teal .grammar-item:hover { border-color: #4ecdc4; }
+  .theme-teal .vocab-tag:hover { border-color: #4ecdc4; }
+
+  .theme-purple .card-icon { background: rgba(123,94,167,0.15); color: #a882d4; }
+  .theme-purple .card-header { border-left: 3px solid var(--purple); }
+  .theme-purple .subcat-title { color: #a882d4; }
+  .theme-purple .grammar-jp { color: #a882d4; }
+  .theme-purple .vocab-jp { color: #a882d4; }
+  .theme-purple .grammar-item:hover { border-color: #a882d4; }
+  .theme-purple .vocab-tag:hover { border-color: #a882d4; }
+
+  .theme-blue .card-icon { background: rgba(58,134,255,0.15); color: #6fa8ff; }
+  .theme-blue .card-header { border-left: 3px solid var(--blue); }
+  .theme-blue .subcat-title { color: #6fa8ff; }
+  .theme-blue .grammar-jp { color: #6fa8ff; }
+  .theme-blue .vocab-jp { color: #6fa8ff; }
+  .theme-blue .grammar-item:hover { border-color: #6fa8ff; }
+  .theme-blue .vocab-tag:hover { border-color: #6fa8ff; }
+
+  .theme-orange .card-icon { background: rgba(244,132,95,0.15); color: var(--orange); }
+  .theme-orange .card-header { border-left: 3px solid var(--orange); }
+  .theme-orange .subcat-title { color: var(--orange); }
+  .theme-orange .grammar-jp { color: var(--orange); }
+  .theme-orange .vocab-jp { color: var(--orange); }
+  .theme-orange .grammar-item:hover { border-color: var(--orange); }
+  .theme-orange .vocab-tag:hover { border-color: var(--orange); }
+
+  /* Search bar */
+  .search-wrap {
+    position: relative;
+    z-index: 10;
+    max-width: 500px;
+    margin: 24px auto 0;
+    padding: 0 20px;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px 10px 40px;
+    color: var(--white);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Progress bar decoration */
+  .progress-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    z-index: 100;
+    transition: width 0.1s;
+  }
+
+  /* Tag badge */
+  .badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: monospace;
+  }
+
+  .badge-n3 { background: rgba(201,168,76,0.2); color: var(--gold); }
+  .badge-key { background: rgba(200,16,46,0.2); color: #e85c7a; }
+
+  /* Expand all button */
+  .toolbar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+
+  .btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--red); }
+
+  /* Highlight for search */
+  .highlight { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+  /* ===== WORD POPUP MODAL ===== */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .popup-card {
+    background: #13131e;
+    border: 1px solid #333;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 88vh;
+    overflow-y: auto;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+  .popup-overlay.active .popup-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .popup-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    background: #13131e;
+    z-index: 2;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .popup-word-main { flex: 1; min-width: 0; }
+
+  .popup-jp-word {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+    letter-spacing: 2px;
+  }
+
+  .popup-reading {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: rgba(201,168,76,0.55);
+    margin-top: 3px;
+    letter-spacing: 2px;
+  }
+
+  .popup-cn-meaning {
+    font-size: 16px;
+    color: var(--white);
+    margin-top: 6px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .popup-type-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    font-family: monospace;
+    text-transform: uppercase;
+  }
+
+  .popup-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  .speak-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: rgba(201,168,76,0.1);
+    color: var(--gold);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .speak-btn:hover { background: rgba(201,168,76,0.25); transform: scale(1.08); }
+  .speak-btn.speaking {
+    background: rgba(201,168,76,0.3);
+    animation: pulse-speak 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-speak {
+    from { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+    to   { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
+  }
+
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    background: transparent;
+    color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .close-btn:hover { border-color: #e85c7a; color: #e85c7a; }
+
+  .popup-body { padding: 20px 24px 24px; }
+
+  /* Conjugation table */
+  .popup-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .popup-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #222;
+  }
+  .popup-section { margin-bottom: 22px; }
+
+  .conj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .conj-cell {
+    background: #1a1a28;
+    border: 1px solid #2a2a3c;
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .conj-cell:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+
+  .conj-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    font-family: 'Noto Serif SC', serif;
+  }
+  .conj-form {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .conj-read {
+    font-size: 10px;
+    color: rgba(201,168,76,0.45);
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-top: 1px;
+  }
+
+  /* Example sentences */
+  .example-card {
+    background: #1a1a28;
+    border: 1px solid #2a2a3c;
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-left-color 0.2s;
+  }
+  .example-card:hover { border-left-color: #e85c7a; }
+  .example-card:last-child { margin-bottom: 0; }
+
+  .ex-jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .ex-jp .highlight-word {
+    color: var(--gold);
+    font-weight: 700;
+    border-bottom: 1px dotted var(--gold);
+  }
+  .ex-cn {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .ex-speak {
+    float: right;
+    font-size: 13px;
+    color: rgba(201,168,76,0.4);
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-left: 8px;
+  }
+  .ex-speak:hover { color: var(--gold); }
+
+  /* Related words */
+  .related-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .related-tag {
+    background: #1a1a28;
+    border: 1px solid #2a2a3c;
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    text-align: center;
+  }
+  .related-tag:hover { border-color: var(--gold); }
+  .related-jp { font-family:'Noto Sans JP',sans-serif; font-size:13px; color:var(--gold); display:block; }
+  .related-cn { font-size:10px; color:var(--muted); display:block; }
+
+  /* Tip box */
+  .tip-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: rgba(201,168,76,0.8);
+    line-height: 1.6;
+  }
+  .tip-box strong { color: var(--gold); }
+
+  /* Voice not supported notice */
+  .no-voice { font-size:11px; color:#555; text-align:center; margin-top:4px; }
+
+  /* Click hint on vocab tags */
+  .vocab-tag { position: relative; }
+  .vocab-tag::after {
+    content: '点击查看';
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: var(--gold);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    letter-spacing: 1px;
+  }
+  .vocab-tag:hover::after { opacity: 1; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeIn 0.4s ease both; }
+  .card:nth-child(2) { animation-delay: 0.05s; }
+  .card:nth-child(3) { animation-delay: 0.1s; }
+  .card:nth-child(4) { animation-delay: 0.15s; }
+  .card:nth-child(5) { animation-delay: 0.2s; }
+  .card:nth-child(6) { animation-delay: 0.25s; }
+  .card:nth-child(7) { animation-delay: 0.3s; }
+  .card:nth-child(8) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+
+<div class="progress-line" id="progressLine"></div>
+
+<div class="kanji-deco">日本語能力試験　Ｎ３　文法　語彙　漢字</div>
+<div class="kanji-deco2">初学者向け　文型　表現　助詞　時制</div>
+
+<header>
+  <div class="header-jp">JLPT N3 · 日本語能力試験 · 初学者向け</div>
+  <h1>日语 <span>N3</span> 思维导图</h1>
+  <p class="subtitle">基础语法 · 核心词汇 · 助词用法 · 表达句型</p>
+</header>
+
+<div class="search-wrap">
+  <div class="search-icon">🔍</div>
+  <input type="text" class="search-input" id="searchInput" placeholder="搜索语法、词汇、句型..." />
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#e85c7a"></div>语法结构</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0d080"></div>词汇</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4ecdc4"></div>助词</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#a882d4"></div>动词形态</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6fa8ff"></div>敬语</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f4845f"></div>汉字</div>
+</div>
+
+<div class="toolbar">
+  <button class="btn" onclick="expandAll()">展开全部</button>
+  <button class="btn" onclick="collapseAll()">收起全部</button>
+</div>
+
+<div class="content">
+  <div class="section-grid" id="mainGrid">
+
+    <!-- 1. 条件表达 -->
+    <div class="card theme-red" id="card-conditional">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">条</div>
+        <div class="card-title-wrap">
+          <div class="card-title">条件与假设</div>
+          <div class="card-subtitle">条件文 · Conditionals</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">四大条件型 <span>Conditional Forms</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜と</span>
+                <span class="grammar-cn">自然条件／习惯性结果（客观规律）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">春になると、桜が咲く。</span>
+                  <span class="cn">一到春天，樱花就会开放。（自然规律）</span>
+                  <span class="jp" style="margin-top:4px">このボタンを押すと、ドアが開く。</span>
+                  <span class="cn">按下这个按钮，门就会打开。</span>
+                </div>
+                <div style="margin-top:6px;font-size:11px;color:var(--muted)">📌 接动词字典形 / 名词だ + と　| 不用于命令句、意志句</div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ば</span>
+                <span class="grammar-cn">假定条件（前件成立则后件成立）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">時間があれば、旅行したい。</span>
+                  <span class="cn">如果有时间的话，想去旅行。</span>
+                  <span class="jp" style="margin-top:4px">もっと練習すれば、上手になる。</span>
+                  <span class="cn">如果多加练习的话，就会变得更好。</span>
+                </div>
+                <div style="margin-top:6px;font-size:11px;color:var(--muted)">📌 动词：う段→え段+ば（食べる→食べれば）| い形：い→ければ | な形/名：なら</div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜たら</span>
+                <span class="grammar-cn">假设完成条件（某事完成后）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">家に帰ったら、電話してください。</span>
+                  <span class="cn">回到家之后，请给我打电话。</span>
+                  <span class="jp" style="margin-top:4px">宝くじが当たったら、家を買う。</span>
+                  <span class="cn">如果彩票中奖了，就买一栋房子。</span>
+                </div>
+                <div style="margin-top:6px;font-size:11px;color:var(--muted)">📌 接た形+ら | 可用于命令句 | 表示"一旦…就…"</div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜なら</span>
+                <span class="grammar-cn">话题条件（以对方话语为前提）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">行くなら、早く出発しよう。</span>
+                  <span class="cn">既然要去的话，就早点出发吧。</span>
+                  <span class="jp" style="margin-top:4px">日本語を勉強するなら、N3がいい。</span>
+                  <span class="cn">如果要学日语的话，N3是个好目标。</span>
+                </div>
+                <div style="margin-top:6px;font-size:11px;color:var(--muted)">📌 接普通形+なら | 侧重"如果像你说的那样"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">其他条件表达 <span>Other Conditionals</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ても / でも</span>
+                <span class="grammar-cn">即使…也…（逆接条件）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">雨が降っても、出かける。</span>
+                  <span class="cn">即使下雨，也要出门。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ためには</span>
+                <span class="grammar-cn">为了…（目的条件）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">合格するためには、毎日勉強しなければならない。</span>
+                  <span class="cn">为了通过考试，每天都必须学习。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 助词 -->
+    <div class="card theme-teal" id="card-particles">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">助</div>
+        <div class="card-title-wrap">
+          <div class="card-title">助词详解</div>
+          <div class="card-subtitle">助詞 · Particles</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">基本格助词 <span>Case Particles</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">が / は</span>
+                <span class="grammar-cn">主语（强调）/ 主题（对比）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">猫が好きだ。（强调是猫）</span>
+                  <span class="cn">我喜欢的是猫。（が强调主语）</span>
+                  <span class="jp" style="margin-top:4px">猫は好きだが、犬は嫌いだ。</span>
+                  <span class="cn">猫我喜欢，但狗我讨厌。（は用于对比）</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">に</span>
+                <span class="grammar-cn">方向/时间/存在地点/目的</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">駅に行く。/ 3時に来る。/ 机に本がある。</span>
+                  <span class="cn">去车站 / 3点来 / 桌上有书</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">で</span>
+                <span class="grammar-cn">动作地点/手段/原因/范围</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">図書館で勉強する。/ バスで行く。</span>
+                  <span class="cn">在图书馆学习 / 坐公交去</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">へ / を / から / まで</span>
+                <span class="grammar-cn">方向 / 宾语 / 起点 / 终点</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">東京へ向かう / ご飯を食べる</span>
+                  <span class="cn">朝东京前进 / 吃饭</span>
+                  <span class="jp" style="margin-top:4px">東京から大阪まで新幹線で行く。</span>
+                  <span class="cn">从东京到大阪坐新干线去。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">N3重要复合助词 <span>Compound Particles</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜について</span>
+                <span class="grammar-cn">关于…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">環境問題について話し合う。</span>
+                  <span class="cn">就环境问题进行讨论。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜によって / により</span>
+                <span class="grammar-cn">根据…/由于…/因人而异</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">人によって意見が違う。</span>
+                  <span class="cn">因人而异，意见各不相同。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜に対して</span>
+                <span class="grammar-cn">对…/针对…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">彼の意見に対して反論した。</span>
+                  <span class="cn">对他的意见进行了反驳。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜として</span>
+                <span class="grammar-cn">作为…（身份/立场）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">教師として働いている。</span>
+                  <span class="cn">作为教师在工作。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 动词形态 -->
+    <div class="card theme-purple" id="card-verbs">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">動</div>
+        <div class="card-title-wrap">
+          <div class="card-title">动词形态与变形</div>
+          <div class="card-subtitle">動詞活用 · Verb Conjugation</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">被动态 <span>Passive Voice</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜られる / 〜される</span>
+                <span class="grammar-cn">被动（被…/受到…）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">先生に褒められた。（被老师表扬了）</span>
+                  <span class="cn">変形：食べる→食べられる / 書く→書かれる</span>
+                  <span class="jp" style="margin-top:4px">財布を盗まれた。</span>
+                  <span class="cn">钱包被偷了。（被害被动）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">使役态 <span>Causative Voice</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜させる / 〜せる</span>
+                <span class="grammar-cn">使役（让…做/使…做）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">子どもに野菜を食べさせる。</span>
+                  <span class="cn">让孩子吃蔬菜。</span>
+                  <span class="jp" style="margin-top:4px">変形：食べる→食べさせる / 書く→書かせる</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜させられる</span>
+                <span class="grammar-cn">被迫做…（使役被动）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">毎日残業させられる。</span>
+                  <span class="cn">每天被迫加班。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">意志・推测形 <span>Volitional/Presumptive</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜（よ）う / 〜ましょう</span>
+                <span class="grammar-cn">意志形（打算做/一起做吧）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">一緒に行こう！/ 始めましょう。</span>
+                  <span class="cn">一起去吧！/ 开始吧。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ようとする</span>
+                <span class="grammar-cn">试图做…/正要做…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">出かけようとしたら、雨が降った。</span>
+                  <span class="cn">正要出门，下雨了。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">补助动词 <span>Auxiliary Verbs</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てしまう</span>
+                <span class="grammar-cn">完全做完/不小心做了（含遗憾）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">財布を忘れてしまった。</span>
+                  <span class="cn">（不小心）把钱包忘了。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ておく</span>
+                <span class="grammar-cn">提前做好准备（事先…）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">旅行前にホテルを予約しておく。</span>
+                  <span class="cn">旅行前提前预订酒店。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てみる</span>
+                <span class="grammar-cn">试试做…（尝试）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">新しい料理を作ってみた。</span>
+                  <span class="cn">尝试做了新菜。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てある</span>
+                <span class="grammar-cn">某人做了某事（状态保留）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">窓が開けてある。</span>
+                  <span class="cn">（有人把）窗户开着。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 重要句型 -->
+    <div class="card theme-red" id="card-patterns">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">型</div>
+        <div class="card-title-wrap">
+          <div class="card-title">重要语法句型</div>
+          <div class="card-subtitle">文型 · Sentence Patterns</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">义务与许可 <span>Obligation & Permission</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜なければならない</span>
+                <span class="grammar-cn">必须…/不得不…（义务）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">毎日練習しなければならない。</span>
+                  <span class="cn">每天必须练习。</span>
+                  <span style="font-size:11px;color:var(--muted);margin-top:4px;display:block">口语缩短：〜なきゃ・〜ないといけない</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てもいい / 〜てはいけない</span>
+                <span class="grammar-cn">可以… / 不可以…（许可/禁止）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">ここで写真を撮ってもいいですか。</span>
+                  <span class="cn">这里可以拍照吗？</span>
+                  <span class="jp" style="margin-top:4px">ここでタバコを吸ってはいけない。</span>
+                  <span class="cn">这里不可以吸烟。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">程度与比较 <span>Degree & Comparison</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ほど / 〜ほど〜ない</span>
+                <span class="grammar-cn">程度…/没有…那么…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">死ぬほど疲れた。/ 彼ほど上手くない。</span>
+                  <span class="cn">累得要死 / 没有他那么厉害</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜だけ / 〜しか〜ない</span>
+                <span class="grammar-cn">只…/ 只有…（否定限定）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">一つだけ選んでください。</span>
+                  <span class="cn">请只选一个。</span>
+                  <span class="jp" style="margin-top:4px">お金が100円しかない。</span>
+                  <span class="cn">只有100日元（不够用的语感）。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜さえ〜ば</span>
+                <span class="grammar-cn">只要…就…（最低条件）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">お金さえあれば、何でも買える。</span>
+                  <span class="cn">只要有钱，什么都能买。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">原因与理由 <span>Cause & Reason</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ので / 〜から</span>
+                <span class="grammar-cn">因为…所以…（客观/主观原因）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">雨なので、家にいる。（客观事实）</span>
+                  <span class="cn">因为下雨，所以待在家里。</span>
+                  <span class="jp" style="margin-top:4px">疲れたから、もう寝る。（主观判断）</span>
+                  <span class="cn">因为累了，所以去睡觉。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ために / 〜せいで</span>
+                <span class="grammar-cn">由于…（目的/原因） / 都怪…（负面）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">風邪のせいで、試験を受けられなかった。</span>
+                  <span class="cn">都怪感冒，没能参加考试。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">推测与不确定 <span>Speculation</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜かもしれない</span>
+                <span class="grammar-cn">也许…/说不定…（50%可能性）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">明日は雨が降るかもしれない。</span>
+                  <span class="cn">明天也许会下雨。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜はずだ / 〜はずがない</span>
+                <span class="grammar-cn">应该…（有根据）/ 不可能…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">彼は来るはずだ。/ そんなはずがない。</span>
+                  <span class="cn">他应该会来的。/ 不可能有那种事。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜らしい / 〜ようだ / 〜そうだ</span>
+                <span class="grammar-cn">听说/好像/看起来（三种推测）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">らしい：伝聞推定（听说）</span>
+                  <span class="jp">ようだ：根据观察（好像）</span>
+                  <span class="jp">そうだ：外观判断（看起来）/传闻（听说）</span>
+                  <span class="cn">雨が降りそうだ。（看样子要下雨）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 敬语 -->
+    <div class="card theme-blue" id="card-keigo">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">敬</div>
+        <div class="card-title-wrap">
+          <div class="card-title">敬语体系</div>
+          <div class="card-subtitle">敬語 · Keigo</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">尊敬语 <span>Sonkeigo 尊敬語</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">お〜になる / ご〜になる</span>
+                <span class="grammar-cn">尊敬语构成（对方做某事）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">先生はお帰りになりました。</span>
+                  <span class="cn">老师回去了。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">特殊尊敬语动词</span>
+                <span class="grammar-cn">不规则敬语动词对照</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">いる→いらっしゃる　言う→おっしゃる</span>
+                  <span class="jp">行く/来る→いらっしゃる</span>
+                  <span class="jp">食べる/飲む→召し上がる</span>
+                  <span class="jp">知っている→ご存じ　くれる→くださる</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">谦让语 <span>Kenjōgo 謙譲語</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">お〜する / ご〜する</span>
+                <span class="grammar-cn">谦让语构成（自己做某事）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">お荷物をお持ちします。</span>
+                  <span class="cn">我来帮您拿行李。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">特殊谦让语动词</span>
+                <span class="grammar-cn">不规则谦让动词对照</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">いる→おる　言う→申す</span>
+                  <span class="jp">行く/来る→参る　もらう→いただく</span>
+                  <span class="jp">食べる/飲む→いただく</span>
+                  <span class="jp">知っている→存じる　あげる→差し上げる</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">丁宁语 <span>Teineigo 丁寧語</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">です / ます / ございます</span>
+                <span class="grammar-cn">礼貌体（日常敬语）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">こちらでございます。（非常礼貌）</span>
+                  <span class="cn">就是这里。（最礼貌的表达）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 接续表达 -->
+    <div class="card theme-teal" id="card-conjunctions">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">接</div>
+        <div class="card-title-wrap">
+          <div class="card-title">接续与连接</div>
+          <div class="card-subtitle">接続表現 · Conjunctions</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">逆接 <span>Contrast/Concession</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜が / 〜けれど(も) / 〜のに</span>
+                <span class="grammar-cn">虽然…但是… / 明明…却…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">一生懸命勉強したのに、試験に落ちた。</span>
+                  <span class="cn">明明拼命学了，考试却没通过。（のに含遗憾）</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ながら</span>
+                <span class="grammar-cn">一边…一边… / 虽然…却…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">音楽を聴きながら勉強する。</span>
+                  <span class="cn">一边听音乐一边学习。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">顺接/追加 <span>Addition</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜し、〜し</span>
+                <span class="grammar-cn">又…又…（并列理由）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">安いし、おいしいし、また来よう。</span>
+                  <span class="cn">既便宜又好吃，下次再来吧。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜上に / 〜だけでなく</span>
+                <span class="grammar-cn">不仅…而且…</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">彼女は頭がいい上に、優しい。</span>
+                  <span class="cn">她不仅聪明，还很温柔。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. 核心词汇 - 动词 -->
+    <div class="card theme-gold" id="card-vocab-verbs">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">詞</div>
+        <div class="card-title-wrap">
+          <div class="card-title">N3核心动词</div>
+          <div class="card-subtitle">動詞語彙 · Core Verbs</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">日常动作 <span>Daily Actions</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">調べる</span><span class="vocab-read">しらべる</span><span class="vocab-cn">调查</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">集める</span><span class="vocab-read">あつめる</span><span class="vocab-cn">收集</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">比べる</span><span class="vocab-read">くらべる</span><span class="vocab-cn">比较</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">変わる</span><span class="vocab-read">かわる</span><span class="vocab-cn">变化</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">増える</span><span class="vocab-read">ふえる</span><span class="vocab-cn">增加</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">減る</span><span class="vocab-read">へる</span><span class="vocab-cn">减少</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">続ける</span><span class="vocab-read">つづける</span><span class="vocab-cn">继续</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">止める</span><span class="vocab-read">とめる</span><span class="vocab-cn">停止</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">決める</span><span class="vocab-read">きめる</span><span class="vocab-cn">决定</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">伝える</span><span class="vocab-read">つたえる</span><span class="vocab-cn">传达</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">認める</span><span class="vocab-read">みとめる</span><span class="vocab-cn">承认</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">困る</span><span class="vocab-read">こまる</span><span class="vocab-cn">困扰</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">直す</span><span class="vocab-read">なおす</span><span class="vocab-cn">修理/改</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">壊す</span><span class="vocab-read">こわす</span><span class="vocab-cn">破坏</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">選ぶ</span><span class="vocab-read">えらぶ</span><span class="vocab-cn">选择</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">運ぶ</span><span class="vocab-read">はこぶ</span><span class="vocab-cn">搬运</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">断る</span><span class="vocab-read">ことわる</span><span class="vocab-cn">拒绝</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">頼む</span><span class="vocab-read">たのむ</span><span class="vocab-cn">请求</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">喜ぶ</span><span class="vocab-read">よろこぶ</span><span class="vocab-cn">高兴</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">怒る</span><span class="vocab-read">おこる</span><span class="vocab-cn">生气</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">悲しむ</span><span class="vocab-read">かなしむ</span><span class="vocab-cn">悲伤</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">驚く</span><span class="vocab-read">おどろく</span><span class="vocab-cn">吃惊</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">社会/思维动词 <span>Social/Mental Verbs</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">考える</span><span class="vocab-read">かんがえる</span><span class="vocab-cn">思考</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">感じる</span><span class="vocab-read">かんじる</span><span class="vocab-cn">感觉</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">信じる</span><span class="vocab-read">しんじる</span><span class="vocab-cn">相信</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">疑う</span><span class="vocab-read">うたがう</span><span class="vocab-cn">怀疑</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">想像する</span><span class="vocab-read">そうぞう</span><span class="vocab-cn">想象</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">説明する</span><span class="vocab-read">せつめい</span><span class="vocab-cn">说明</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">反対する</span><span class="vocab-read">はんたい</span><span class="vocab-cn">反对</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">賛成する</span><span class="vocab-read">さんせい</span><span class="vocab-cn">赞成</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. 形容词词汇 -->
+    <div class="card theme-gold" id="card-adj">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">形</div>
+        <div class="card-title-wrap">
+          <div class="card-title">形容词与副词</div>
+          <div class="card-subtitle">形容詞・副詞 · Adjectives & Adverbs</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">イ形容词 <span>い-Adjectives</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">恥ずかしい</span><span class="vocab-cn">害羞的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">羨ましい</span><span class="vocab-cn">羡慕的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">悔しい</span><span class="vocab-cn">懊悔的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">恐ろしい</span><span class="vocab-cn">可怕的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">激しい</span><span class="vocab-cn">激烈的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">細かい</span><span class="vocab-cn">细致的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">珍しい</span><span class="vocab-cn">稀有的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">眠い</span><span class="vocab-cn">困倦的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">硬い</span><span class="vocab-cn">坚硬的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">柔らかい</span><span class="vocab-cn">柔软的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">鋭い</span><span class="vocab-cn">锐利的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">鈍い</span><span class="vocab-cn">迟钝的</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">ナ形容词 <span>な-Adjectives</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">積極的</span><span class="vocab-cn">积极的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">消極的</span><span class="vocab-cn">消极的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">具体的</span><span class="vocab-cn">具体的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">様々な</span><span class="vocab-cn">各种各样</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">十分な</span><span class="vocab-cn">充分的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">特別な</span><span class="vocab-cn">特别的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">自由な</span><span class="vocab-cn">自由的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">自然な</span><span class="vocab-cn">自然的</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">重要副词 <span>Key Adverbs</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">だいたい</span><span class="vocab-cn">大概</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">けっして</span><span class="vocab-cn">绝对不</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">たしかに</span><span class="vocab-cn">确实</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">むしろ</span><span class="vocab-cn">宁可/反而</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">やはり</span><span class="vocab-cn">果然/还是</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">ますます</span><span class="vocab-cn">越来越</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">それほど</span><span class="vocab-cn">那么(程度)</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">ちゃんと</span><span class="vocab-cn">好好地</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">なるべく</span><span class="vocab-cn">尽量</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">せっかく</span><span class="vocab-cn">好不容易</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. 汉字 -->
+    <div class="card theme-orange" id="card-kanji">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">字</div>
+        <div class="card-title-wrap">
+          <div class="card-title">N3重要汉字</div>
+          <div class="card-subtitle">漢字 · Kanji (约370字)</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">时间/自然 <span>Time & Nature</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">昨日</span><span class="vocab-read">きのう</span><span class="vocab-cn">昨天</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">今日</span><span class="vocab-read">きょう</span><span class="vocab-cn">今天</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">明日</span><span class="vocab-read">あした</span><span class="vocab-cn">明天</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">季節</span><span class="vocab-read">きせつ</span><span class="vocab-cn">季节</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">温度</span><span class="vocab-read">おんど</span><span class="vocab-cn">温度</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">気温</span><span class="vocab-read">きおん</span><span class="vocab-cn">气温</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">天気</span><span class="vocab-read">てんき</span><span class="vocab-cn">天气</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">台風</span><span class="vocab-read">たいふう</span><span class="vocab-cn">台风</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">社会/人际 <span>Society & Relations</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">社会</span><span class="vocab-read">しゃかい</span><span class="vocab-cn">社会</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">政治</span><span class="vocab-read">せいじ</span><span class="vocab-cn">政治</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">経済</span><span class="vocab-read">けいざい</span><span class="vocab-cn">经济</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">文化</span><span class="vocab-read">ぶんか</span><span class="vocab-cn">文化</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">教育</span><span class="vocab-read">きょういく</span><span class="vocab-cn">教育</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">家族</span><span class="vocab-read">かぞく</span><span class="vocab-cn">家族</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">友人</span><span class="vocab-read">ゆうじん</span><span class="vocab-cn">朋友</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">結婚</span><span class="vocab-read">けっこん</span><span class="vocab-cn">结婚</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">常用汉字读法规律 <span>Reading Rules</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">音読み vs 訓読み</span>
+                <span class="grammar-cn">音读（汉字音）vs 训读（日语音）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">山：やま（训）/ さん（音）→ 山田やまだ / 富士山ふじさん</span>
+                  <span class="jp">水：みず（训）/ すい（音）→ 水みず / 水曜日すいようび</span>
+                  <span class="jp">日：ひ・か（训）/ にち・じつ（音）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. 名词词汇 -->
+    <div class="card theme-gold" id="card-nouns">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">名</div>
+        <div class="card-title-wrap">
+          <div class="card-title">核心名词分类</div>
+          <div class="card-subtitle">名詞語彙 · Core Nouns</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">抽象名词 <span>Abstract Nouns</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">理由</span><span class="vocab-read">りゆう</span><span class="vocab-cn">理由</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">目的</span><span class="vocab-read">もくてき</span><span class="vocab-cn">目的</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">原因</span><span class="vocab-read">げんいん</span><span class="vocab-cn">原因</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">結果</span><span class="vocab-read">けっか</span><span class="vocab-cn">结果</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">影響</span><span class="vocab-read">えいきょう</span><span class="vocab-cn">影响</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">問題</span><span class="vocab-read">もんだい</span><span class="vocab-cn">问题</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">機会</span><span class="vocab-read">きかい</span><span class="vocab-cn">机会</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">可能性</span><span class="vocab-read">かのうせい</span><span class="vocab-cn">可能性</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">必要</span><span class="vocab-read">ひつよう</span><span class="vocab-cn">必要</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">意味</span><span class="vocab-read">いみ</span><span class="vocab-cn">意思</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">場合</span><span class="vocab-read">ばあい</span><span class="vocab-cn">情况</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">関係</span><span class="vocab-read">かんけい</span><span class="vocab-cn">关系</span></div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">身体/情感 <span>Body & Emotions</span></div>
+          <div class="vocab-grid">
+            <div class="vocab-tag"><span class="vocab-jp">気持ち</span><span class="vocab-read">きもち</span><span class="vocab-cn">心情</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">気分</span><span class="vocab-read">きぶん</span><span class="vocab-cn">心情/状态</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">性格</span><span class="vocab-read">せいかく</span><span class="vocab-cn">性格</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">態度</span><span class="vocab-read">たいど</span><span class="vocab-cn">态度</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">記憶</span><span class="vocab-read">きおく</span><span class="vocab-cn">记忆</span></div>
+            <div class="vocab-tag"><span class="vocab-jp">経験</span><span class="vocab-read">けいけん</span><span class="vocab-cn">经验</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. 授受动词 -->
+    <div class="card theme-purple" id="card-giving">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">授</div>
+        <div class="card-title-wrap">
+          <div class="card-title">授受动词系统</div>
+          <div class="card-subtitle">授受表現 · Giving & Receiving</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">三个核心授受动词</div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">あげる</span>
+                <span class="grammar-cn">给（我→他/他→他）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">友達にプレゼントをあげた。</span>
+                  <span class="cn">给了朋友礼物。（给出去）</span>
+                  <span class="jp" style="margin-top:4px">〜てあげる：帮别人做（带有恩惠感）</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">もらう</span>
+                <span class="grammar-cn">收到（我←他）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">友達にプレゼントをもらった。</span>
+                  <span class="cn">从朋友那里收到了礼物。</span>
+                  <span class="jp" style="margin-top:4px">〜てもらう：请别人帮忙做（自己受益）</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">くれる</span>
+                <span class="grammar-cn">给（他→我/我方）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">友達が本をくれた。</span>
+                  <span class="cn">朋友给了我一本书。（站在我的角度）</span>
+                  <span class="jp" style="margin-top:4px">〜てくれる：别人帮我做（感谢语气）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">方向对比图示</div>
+          <div style="background:var(--surface2);border-radius:8px;padding:12px;font-size:12px;font-family:'Noto Sans JP',sans-serif;line-height:2">
+            <div style="color:var(--muted)">
+              <span style="color:#a882d4">あげる</span>：私→あなた / 彼→彼女<br>
+              <span style="color:#a882d4">もらう</span>：私←あなた（私が主語）<br>
+              <span style="color:#a882d4">くれる</span>：あなた→私（あなたが主語）
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. N3特色表达 -->
+    <div class="card theme-blue" id="card-special">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-icon">特</div>
+        <div class="card-title-wrap">
+          <div class="card-title">N3特色表达</div>
+          <div class="card-subtitle">特殊文型 · Special Patterns</div>
+        </div>
+        <div class="card-toggle">+</div>
+      </div>
+      <div class="card-body">
+        <div class="subcat">
+          <div class="subcat-title">形式名词 <span>Formal Nouns</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜こと / 〜の</span>
+                <span class="grammar-cn">名词化（…这件事）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">日本語を話すことが好きです。</span>
+                  <span class="cn">我喜欢说日语这件事。</span>
+                  <span class="jp" style="margin-top:4px">彼が来るのを待っている。</span>
+                  <span class="cn">在等他来。（の更口语）</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜わけ / 〜わけだ</span>
+                <span class="grammar-cn">理所当然/即是说…（逻辑结论）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">彼は10年間住んでいたから、詳しいわけだ。</span>
+                  <span class="cn">他住了10年，所以熟悉也是理所当然的。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ところだ / 〜ところに</span>
+                <span class="grammar-cn">正在…之际/就在此时</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">今、出かけるところだ。（正要出门）</span>
+                  <span class="jp">帰ったところだ。（刚回来）</span>
+                  <span class="jp">食べているところだ。（正在吃）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="subcat">
+          <div class="subcat-title">程度强调 <span>Degree Emphasis</span></div>
+          <div class="grammar-list">
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てたまらない</span>
+                <span class="grammar-cn">…得受不了（极度状态）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">眠くてたまらない。</span>
+                  <span class="cn">困得要命。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜てしかたがない</span>
+                <span class="grammar-cn">…得没办法（自然情感）</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">心配でしかたがない。</span>
+                  <span class="cn">担心得不得了。</span>
+                </div>
+              </div>
+            </div>
+            <div class="grammar-item" onclick="toggleGrammar(this)">
+              <div class="grammar-item-header">
+                <span class="grammar-jp">〜ばかり</span>
+                <span class="grammar-cn">光做…/只有…/刚做完</span>
+              </div>
+              <div class="grammar-detail">
+                <div class="grammar-example">
+                  <span class="jp">ゲームばかりしている。（光玩游戏）</span>
+                  <span class="jp">来たばかりだ。（刚来）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end section-grid -->
+</div>
+
+<!-- WORD POPUP MODAL -->
+<div class="popup-overlay" id="wordPopup" onclick="handleOverlayClick(event)">
+  <div class="popup-card" id="popupCard">
+    <div class="popup-top">
+      <div class="popup-word-main">
+        <div class="popup-jp-word" id="popupJpWord">—</div>
+        <div class="popup-reading" id="popupReading"></div>
+        <div class="popup-cn-meaning" id="popupCnMeaning"></div>
+        <div id="popupTypeBadge"></div>
+      </div>
+      <div class="popup-actions">
+        <button class="close-btn" onclick="closePopup()" title="关闭">✕</button>
+        <button class="speak-btn" id="speakBtn" onclick="speakWord()" title="朗读发音">🔊</button>
+      </div>
+    </div>
+    <div class="popup-body">
+      <div id="conjSection" class="popup-section">
+        <div class="popup-section-title">变形一览</div>
+        <div class="conj-grid" id="conjGrid"></div>
+      </div>
+      <div id="exSection" class="popup-section">
+        <div class="popup-section-title">例句</div>
+        <div id="exList"></div>
+      </div>
+      <div id="tipSection" class="popup-section" style="display:none">
+        <div class="popup-section-title">学习提示</div>
+        <div class="tip-box" id="tipBox"></div>
+      </div>
+      <div id="relatedSection" class="popup-section" style="display:none">
+        <div class="popup-section-title">相关词汇</div>
+        <div class="related-grid" id="relatedGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:8px">
+    <span style="font-family:'Noto Sans JP',sans-serif;letter-spacing:4px;color:rgba(201,168,76,0.5);font-size:14px">日本語能力試験</span>
+  </div>
+  JLPT N3 思维导图 · 点击各卡片展开详细内容 · 点击语法条目查看例句
+  <div style="margin-top:8px;font-size:10px;opacity:0.5">涵盖：条件句 · 被动/使役 · 敬语 · 授受动词 · 助词 · 词汇 · 汉字 · 推测表达</div>
+</footer>
+
+<script>
+  // Toggle card
+  function toggleCard(header) {
+    const card = header.closest('.card');
+    card.classList.toggle('open');
+  }
+
+  // Toggle grammar detail
+  function toggleGrammar(item) {
+    const wasOpen = item.classList.contains('open');
+    // Close siblings
+    item.parentElement.querySelectorAll('.grammar-item.open').forEach(el => {
+      if (el !== item) el.classList.remove('open');
+    });
+    item.classList.toggle('open', !wasOpen);
+  }
+
+  // Expand / collapse all
+  function expandAll() {
+    document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+    document.querySelectorAll('.grammar-item').forEach(i => i.classList.remove('open'));
+  }
+
+  // Progress bar on scroll
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressLine').style.width = scrolled + '%';
+  });
+
+  // Search functionality
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    if (!q) {
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.display = '';
+        c.classList.remove('open');
+        c.querySelectorAll('.highlight').forEach(h => {
+          h.outerHTML = h.textContent;
+        });
+      });
+      return;
+    }
+
+    document.querySelectorAll('.card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        card.style.display = '';
+        card.classList.add('open');
+        card.querySelectorAll('.grammar-item').forEach(item => {
+          if (item.textContent.toLowerCase().includes(q)) {
+            item.classList.add('open');
+          }
+        });
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Open first card on load for demo
+  document.querySelectorAll('.card')[0].classList.add('open');
+
+  // ===================================================
+  // WORD DATABASE — grammar forms + examples + tips
+  // ===================================================
+  const WORD_DB = {
+    // ---- VERBS ----
+    '調べる': {
+      read: 'しらべる', cn: '调查、查阅', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形（原形）', form:'調べる', read:'しらべる'},
+        {label:'ます形（礼貌）', form:'調べます', read:'しらべます'},
+        {label:'て形', form:'調べて', read:'しらべて'},
+        {label:'た形（过去）', form:'調べた', read:'しらべた'},
+        {label:'ない形（否定）', form:'調べない', read:'しらべない'},
+        {label:'可能形', form:'調べられる', read:'しらべられる'},
+        {label:'被动形', form:'調べられる', read:'しらべられる'},
+        {label:'意志形', form:'調べよう', read:'しらべよう'},
+      ],
+      examples: [
+        {jp:'インターネットで調べてみた。', cn:'用网络查了一下。', highlight:'調べて'},
+        {jp:'辞書で言葉の意味を調べる。', cn:'用字典查单词的意思。', highlight:'調べる'},
+        {jp:'警察が事件を調べている。', cn:'警察正在调查案件。', highlight:'調べている'},
+      ],
+      tip: '调べる vs 探す：<strong>調べる</strong>是"调查/查阅"（查资料），<strong>探す</strong>是"寻找"（找东西）。',
+      related: [{jp:'研究する', cn:'研究'}, {jp:'確認する', cn:'确认'}, {jp:'探す', cn:'寻找'}]
+    },
+    '集める': {
+      read: 'あつめる', cn: '收集、聚集', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'集める', read:'あつめる'},
+        {label:'ます形', form:'集めます', read:'あつめます'},
+        {label:'て形', form:'集めて', read:'あつめて'},
+        {label:'た形', form:'集めた', read:'あつめた'},
+        {label:'ない形', form:'集めない', read:'あつめない'},
+        {label:'可能形', form:'集められる', read:'あつめられる'},
+        {label:'被动形', form:'集められる', read:'あつめられる'},
+        {label:'使役形', form:'集めさせる', read:'あつめさせる'},
+      ],
+      examples: [
+        {jp:'切手を集めるのが趣味だ。', cn:'集邮是我的爱好。', highlight:'集める'},
+        {jp:'会議のためにデータを集めた。', cn:'为了会议收集了数据。', highlight:'集めた'},
+        {jp:'チームを一つの場所に集める。', cn:'把团队聚集在一个地方。', highlight:'集める'},
+      ],
+      tip: '<strong>集める</strong>（他动词）vs <strong>集まる</strong>（自动词）：集める是人主动收集，集まる是东西自然聚集。',
+      related: [{jp:'集まる', cn:'聚集（自）'}, {jp:'選ぶ', cn:'选择'}, {jp:'整理する', cn:'整理'}]
+    },
+    '比べる': {
+      read: 'くらべる', cn: '比较', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'比べる', read:'くらべる'},
+        {label:'ます形', form:'比べます', read:'くらべます'},
+        {label:'て形', form:'比べて', read:'くらべて'},
+        {label:'た形', form:'比べた', read:'くらべた'},
+        {label:'ない形', form:'比べない', read:'くらべない'},
+        {label:'可能形', form:'比べられる', read:'くらべられる'},
+        {label:'ば形', form:'比べれば', read:'くらべれば'},
+        {label:'意志形', form:'比べよう', read:'くらべよう'},
+      ],
+      examples: [
+        {jp:'AとBを比べてみよう。', cn:'来比较一下A和B吧。', highlight:'比べて'},
+        {jp:'去年と比べると、ずいぶん変わった。', cn:'与去年相比，变化了很多。', highlight:'比べると'},
+        {jp:'値段を比べてから買う。', cn:'比较价格之后再买。', highlight:'比べて'},
+      ],
+      tip: '常用句型：<strong>AとBを比べる</strong> / <strong>Aに比べて</strong>（与A相比）/ <strong>Aと比べると</strong>',
+      related: [{jp:'違う', cn:'不同'}, {jp:'似る', cn:'相似'}, {jp:'同じ', cn:'相同'}]
+    },
+    '変わる': {
+      read: 'かわる', cn: '变化、改变（自动词）', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'変わる', read:'かわる'},
+        {label:'ます形', form:'変わります', read:'かわります'},
+        {label:'て形', form:'変わって', read:'かわって'},
+        {label:'た形', form:'変わった', read:'かわった'},
+        {label:'ない形', form:'変わらない', read:'かわらない'},
+        {label:'ている形', form:'変わっている', read:'かわっている'},
+        {label:'ば形', form:'変われば', read:'かわれば'},
+        {label:'可能形', form:'変われる', read:'かわれる'},
+      ],
+      examples: [
+        {jp:'季節が変わると気温も変わる。', cn:'季节变换，气温也随之改变。', highlight:'変わる'},
+        {jp:'彼は全然変わっていない。', cn:'他一点都没变。', highlight:'変わっていない'},
+        {jp:'考えが変わった。', cn:'想法改变了。', highlight:'変わった'},
+      ],
+      tip: '<strong>変わる</strong>（自动词：自然变化）vs <strong>変える</strong>（他动词：人为改变）。例：生活が変わる / 生活を変える',
+      related: [{jp:'変える', cn:'改变（他）'}, {jp:'増える', cn:'增加'}, {jp:'減る', cn:'减少'}]
+    },
+    '増える': {
+      read: 'ふえる', cn: '增加（自动词）', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'増える', read:'ふえる'},
+        {label:'ます形', form:'増えます', read:'ふえます'},
+        {label:'て形', form:'増えて', read:'ふえて'},
+        {label:'た形', form:'増えた', read:'ふえた'},
+        {label:'ない形', form:'増えない', read:'ふえない'},
+        {label:'ている形', form:'増えている', read:'ふえている'},
+        {label:'ば形', form:'増えれば', read:'ふえれば'},
+        {label:'可能形', form:'増えられる', read:'ふえられる'},
+      ],
+      examples: [
+        {jp:'最近、外国人観光客が増えている。', cn:'最近，外国游客在增加。', highlight:'増えている'},
+        {jp:'仕事が増えて、忙しい。', cn:'工作增多了，很忙。', highlight:'増えて'},
+        {jp:'去年より収入が増えた。', cn:'收入比去年增加了。', highlight:'増えた'},
+      ],
+      tip: '<strong>増える</strong>（自动词）vs <strong>増やす</strong>（他动词）：増える是自然增加，増やす是人为增加。',
+      related: [{jp:'増やす', cn:'增加（他）'}, {jp:'減る', cn:'减少（自）'}, {jp:'減らす', cn:'减少（他）'}]
+    },
+    '減る': {
+      read: 'へる', cn: '减少（自动词）', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'減る', read:'へる'},
+        {label:'ます形', form:'減ります', read:'へります'},
+        {label:'て形', form:'減って', read:'へって'},
+        {label:'た形', form:'減った', read:'へった'},
+        {label:'ない形', form:'減らない', read:'へらない'},
+        {label:'ている形', form:'減っている', read:'へっている'},
+        {label:'ば形', form:'減れば', read:'へれば'},
+        {label:'可能形', form:'減れる', read:'へれる'},
+      ],
+      examples: [
+        {jp:'人口が減っている。', cn:'人口在减少。', highlight:'減っている'},
+        {jp:'体重が3キロ減った。', cn:'体重减了3公斤。', highlight:'減った'},
+        {jp:'ストレスが減ると健康になる。', cn:'压力减少的话会变健康。', highlight:'減ると'},
+      ],
+      tip: '<strong>減る</strong>（自动词）vs <strong>減らす</strong>（他动词）。惯用语：<strong>お腹が減る</strong>（肚子饿）',
+      related: [{jp:'減らす', cn:'减少（他）'}, {jp:'増える', cn:'增加'}, {jp:'少なくなる', cn:'变少'}]
+    },
+    '続ける': {
+      read: 'つづける', cn: '继续（他动词）', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'続ける', read:'つづける'},
+        {label:'ます形', form:'続けます', read:'つづけます'},
+        {label:'て形', form:'続けて', read:'つづけて'},
+        {label:'た形', form:'続けた', read:'つづけた'},
+        {label:'ない形', form:'続けない', read:'つづけない'},
+        {label:'てform+いる', form:'続けている', read:'つづけている'},
+        {label:'ば形', form:'続ければ', read:'つづければ'},
+        {label:'意志形', form:'続けよう', read:'つづけよう'},
+      ],
+      examples: [
+        {jp:'毎日日本語を勉強し続けている。', cn:'每天坚持学日语。', highlight:'続けている'},
+        {jp:'あきらめずに続けることが大切だ。', cn:'不放弃地坚持下去很重要。', highlight:'続けること'},
+        {jp:'雨が降り続けた。', cn:'雨一直下个不停。', highlight:'続けた'},
+      ],
+      tip: '<strong>〜し続ける</strong>（持续做…）是N3常用句型。続ける vs 続く（自动词）',
+      related: [{jp:'続く', cn:'持续（自）'}, {jp:'頑張る', cn:'加油'}, {jp:'やめる', cn:'停止'}]
+    },
+    '決める': {
+      read: 'きめる', cn: '决定（他动词）', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'決める', read:'きめる'},
+        {label:'ます形', form:'決めます', read:'きめます'},
+        {label:'て形', form:'決めて', read:'きめて'},
+        {label:'た形', form:'決めた', read:'きめた'},
+        {label:'ない形', form:'決めない', read:'きめない'},
+        {label:'可能形', form:'決められる', read:'きめられる'},
+        {label:'被动形', form:'決められる', read:'きめられる'},
+        {label:'意志形', form:'決めよう', read:'きめよう'},
+      ],
+      examples: [
+        {jp:'旅行の日程を決めた。', cn:'决定了旅行的日程。', highlight:'決めた'},
+        {jp:'自分で決めることが大切だ。', cn:'自己做决定很重要。', highlight:'決める'},
+        {jp:'まだ決めていない。', cn:'还没有决定。', highlight:'決めていない'},
+      ],
+      tip: '<strong>決める</strong>（他动）vs <strong>決まる</strong>（自动）：決める是主动决定，決まる是事情被定下来。',
+      related: [{jp:'決まる', cn:'被决定（自）'}, {jp:'選ぶ', cn:'选择'}, {jp:'考える', cn:'思考'}]
+    },
+    '断る': {
+      read: 'ことわる', cn: '拒绝、谢绝', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'断る', read:'ことわる'},
+        {label:'ます形', form:'断ります', read:'ことわります'},
+        {label:'て形', form:'断って', read:'ことわって'},
+        {label:'た形', form:'断った', read:'ことわった'},
+        {label:'ない形', form:'断らない', read:'ことわらない'},
+        {label:'可能形', form:'断れる', read:'ことわれる'},
+        {label:'被动形', form:'断られる', read:'ことわられる'},
+        {label:'ば形', form:'断れば', read:'ことわれば'},
+      ],
+      examples: [
+        {jp:'誘いを断った。', cn:'拒绝了邀请。', highlight:'断った'},
+        {jp:'上手に断る方法を知りたい。', cn:'想知道如何礼貌地拒绝。', highlight:'断る'},
+        {jp:'断られてしまった。', cn:'被拒绝了。', highlight:'断られて'},
+      ],
+      tip: '礼貌拒绝常用：<strong>申し訳ないのですが…</strong>（虽然很抱歉，但是…）接断る的原因。',
+      related: [{jp:'断る', cn:'拒绝'}, {jp:'承る', cn:'接受（谦让）'}, {jp:'遠慮する', cn:'客气/婉拒'}]
+    },
+    '驚く': {
+      read: 'おどろく', cn: '吃惊、惊讶', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'驚く', read:'おどろく'},
+        {label:'ます形', form:'驚きます', read:'おどろきます'},
+        {label:'て形', form:'驚いて', read:'おどろいて'},
+        {label:'た形', form:'驚いた', read:'おどろいた'},
+        {label:'ない形', form:'驚かない', read:'おどろかない'},
+        {label:'ている形', form:'驚いている', read:'おどろいている'},
+        {label:'被动形', form:'驚かされる', read:'おどろかされる'},
+        {label:'ば形', form:'驚けば', read:'おどろけば'},
+      ],
+      examples: [
+        {jp:'そのニュースを聞いて驚いた。', cn:'听到那个新闻，吃了一惊。', highlight:'驚いた'},
+        {jp:'彼女の才能に驚かされた。', cn:'被她的才能所折服。', highlight:'驚かされた'},
+        {jp:'驚いたことに、彼が来た。', cn:'令人惊讶的是，他来了。', highlight:'驚いた'},
+      ],
+      tip: '〜に驚く（对…感到吃惊）/ 〜て驚く。表情：びっくりする（口语）= 驚く（书面语）',
+      related: [{jp:'びっくりする', cn:'吃惊（口语）'}, {jp:'感動する', cn:'感动'}, {jp:'困る', cn:'困扰'}]
+    },
+    '選ぶ': {
+      read: 'えらぶ', cn: '选择', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'選ぶ', read:'えらぶ'},
+        {label:'ます形', form:'選びます', read:'えらびます'},
+        {label:'て形', form:'選んで', read:'えらんで'},
+        {label:'た形', form:'選んだ', read:'えらんだ'},
+        {label:'ない形', form:'選ばない', read:'えらばない'},
+        {label:'可能形', form:'選べる', read:'えらべる'},
+        {label:'被动形', form:'選ばれる', read:'えらばれる'},
+        {label:'ば形', form:'選べば', read:'えらべば'},
+      ],
+      examples: [
+        {jp:'どれを選べばいいかわからない。', cn:'不知道该选哪个。', highlight:'選べば'},
+        {jp:'彼がリーダーに選ばれた。', cn:'他被选为队长。', highlight:'選ばれた'},
+        {jp:'慎重に選んでください。', cn:'请慎重选择。', highlight:'選んで'},
+      ],
+      tip: '<strong>選ぶ</strong>（主动选）/ <strong>選ばれる</strong>（被选中）。N3常用：〜から選ぶ',
+      related: [{jp:'決める', cn:'决定'}, {jp:'比べる', cn:'比较'}, {jp:'考える', cn:'思考'}]
+    },
+    '頼む': {
+      read: 'たのむ', cn: '请求、拜托', type: 'verb1', typeColor: '#4ecdc4',
+      conj: [
+        {label:'字典形', form:'頼む', read:'たのむ'},
+        {label:'ます形', form:'頼みます', read:'たのみます'},
+        {label:'て形', form:'頼んで', read:'たのんで'},
+        {label:'た形', form:'頼んだ', read:'たのんだ'},
+        {label:'ない形', form:'頼まない', read:'たのまない'},
+        {label:'可能形', form:'頼める', read:'たのめる'},
+        {label:'被动形', form:'頼まれる', read:'たのまれる'},
+        {label:'ば形', form:'頼めば', read:'たのめば'},
+      ],
+      examples: [
+        {jp:'友達に手伝ってもらうように頼んだ。', cn:'拜托朋友帮忙了。', highlight:'頼んだ'},
+        {jp:'先生に頼まれた仕事をする。', cn:'做老师委托的工作。', highlight:'頼まれた'},
+        {jp:'お願いがあるんですが、頼めますか？', cn:'我有个请求，可以拜托你吗？', highlight:'頼め'},
+      ],
+      tip: '<strong>頼む</strong>（一般拜托）/ <strong>お願いする</strong>（更礼貌）/ <strong>依頼する</strong>（正式）',
+      related: [{jp:'お願いする', cn:'请求（礼貌）'}, {jp:'断る', cn:'拒绝'}, {jp:'手伝う', cn:'帮忙'}]
+    },
+    '考える': {
+      read: 'かんがえる', cn: '思考、考虑', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'考える', read:'かんがえる'},
+        {label:'ます形', form:'考えます', read:'かんがえます'},
+        {label:'て形', form:'考えて', read:'かんがえて'},
+        {label:'た形', form:'考えた', read:'かんがえた'},
+        {label:'ない形', form:'考えない', read:'かんがえない'},
+        {label:'可能形', form:'考えられる', read:'かんがえられる'},
+        {label:'ている形', form:'考えている', read:'かんがえている'},
+        {label:'意志形', form:'考えよう', read:'かんがえよう'},
+      ],
+      examples: [
+        {jp:'よく考えてから決める。', cn:'好好想清楚再决定。', highlight:'考えて'},
+        {jp:'将来のことを考えている。', cn:'在思考未来的事情。', highlight:'考えている'},
+        {jp:'色々と考えたが、答えが出ない。', cn:'想了很多，但还是想不出答案。', highlight:'考えた'},
+      ],
+      tip: '〜と考える（认为…）是N3常用表达。<strong>考える</strong>（考虑/思考）vs <strong>思う</strong>（感觉/认为）',
+      related: [{jp:'思う', cn:'认为/感觉'}, {jp:'検討する', cn:'研讨'}, {jp:'悩む', cn:'烦恼'}]
+    },
+    '信じる': {
+      read: 'しんじる', cn: '相信、信任', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'信じる', read:'しんじる'},
+        {label:'ます形', form:'信じます', read:'しんじます'},
+        {label:'て形', form:'信じて', read:'しんじて'},
+        {label:'た形', form:'信じた', read:'しんじた'},
+        {label:'ない形', form:'信じない', read:'しんじない'},
+        {label:'可能形', form:'信じられる', read:'しんじられる'},
+        {label:'被动形', form:'信じられる', read:'しんじられる'},
+        {label:'意志形', form:'信じよう', read:'しんじよう'},
+      ],
+      examples: [
+        {jp:'彼の言葉を信じた。', cn:'相信了他说的话。', highlight:'信じた'},
+        {jp:'信じられない！', cn:'真不敢相信！（难以置信）', highlight:'信じられない'},
+        {jp:'自分を信じてください。', cn:'请相信自己。', highlight:'信じて'},
+      ],
+      tip: '<strong>信じられない</strong>是感叹用法，表示"难以置信"。注意可能形和被动形形式相同。',
+      related: [{jp:'疑う', cn:'怀疑'}, {jp:'信頼する', cn:'信赖'}, {jp:'信用する', cn:'信用'}]
+    },
+    '感じる': {
+      read: 'かんじる', cn: '感觉、感受', type: 'verb2', typeColor: '#a882d4',
+      conj: [
+        {label:'字典形', form:'感じる', read:'かんじる'},
+        {label:'ます形', form:'感じます', read:'かんじます'},
+        {label:'て形', form:'感じて', read:'かんじて'},
+        {label:'た形', form:'感じた', read:'かんじた'},
+        {label:'ない形', form:'感じない', read:'かんじない'},
+        {label:'ている形', form:'感じている', read:'かんじている'},
+        {label:'可能形', form:'感じられる', read:'かんじられる'},
+        {label:'意志形', form:'感じよう', read:'かんじよう'},
+      ],
+      examples: [
+        {jp:'春の暖かさを感じる。', cn:'感受到春天的温暖。', highlight:'感じる'},
+        {jp:'何か変だと感じた。', cn:'感觉哪里不对劲。', highlight:'感じた'},
+        {jp:'孤独を感じている。', cn:'感到孤独。', highlight:'感じている'},
+      ],
+      tip: '<strong>感じる</strong>（内心感受）vs <strong>気づく</strong>（注意到）vs <strong>気がする</strong>（总感觉）',
+      related: [{jp:'気づく', cn:'注意到'}, {jp:'思う', cn:'认为'}, {jp:'感動する', cn:'感动'}]
+    },
+    // ---- ADJECTIVES ----
+    '恥ずかしい': {
+      read: 'はずかしい', cn: '害羞的、难为情的', type: 'adj-i', typeColor: '#f4845f',
+      conj: [
+        {label:'基本形', form:'恥ずかしい', read:'はずかしい'},
+        {label:'否定形', form:'恥ずかしくない', read:'はずかしくない'},
+        {label:'过去形', form:'恥ずかしかった', read:'はずかしかった'},
+        {label:'过去否定', form:'恥ずかしくなかった', read:'はずかしくなかった'},
+        {label:'て形', form:'恥ずかしくて', read:'はずかしくて'},
+        {label:'副词形', form:'恥ずかしく', read:'はずかしく'},
+        {label:'名词化', form:'恥ずかしさ', read:'はずかしさ'},
+        {label:'条件形', form:'恥ずかしければ', read:'はずかしければ'},
+      ],
+      examples: [
+        {jp:'人前で話すのが恥ずかしい。', cn:'在人前说话很害羞。', highlight:'恥ずかしい'},
+        {jp:'間違えて恥ずかしかった。', cn:'答错了，很难为情。', highlight:'恥ずかしかった'},
+        {jp:'恥ずかしくて顔が赤くなった。', cn:'害羞得脸红了。', highlight:'恥ずかしくて'},
+      ],
+      tip: '相近词：<strong>照れる</strong>（因害羞而局促）/ <strong>はにかむ</strong>（羞涩）',
+      related: [{jp:'照れる', cn:'局促不安'}, {jp:'緊張する', cn:'紧张'}, {jp:'恥', cn:'耻辱（名词）'}]
+    },
+    '激しい': {
+      read: 'はげしい', cn: '激烈的、猛烈的', type: 'adj-i', typeColor: '#f4845f',
+      conj: [
+        {label:'基本形', form:'激しい', read:'はげしい'},
+        {label:'否定形', form:'激しくない', read:'はげしくない'},
+        {label:'过去形', form:'激しかった', read:'はげしかった'},
+        {label:'て形', form:'激しくて', read:'はげしくて'},
+        {label:'副词形', form:'激しく', read:'はげしく'},
+        {label:'名词化', form:'激しさ', read:'はげしさ'},
+        {label:'条件形', form:'激しければ', read:'はげしければ'},
+        {label:'仮定逆接', form:'激しくても', read:'はげしくても'},
+      ],
+      examples: [
+        {jp:'激しい雨が降っている。', cn:'正在下倾盆大雨。', highlight:'激しい'},
+        {jp:'試合が激しくなってきた。', cn:'比赛变得激烈了起来。', highlight:'激しく'},
+        {jp:'激しい議論が続いた。', cn:'激烈的争论持续着。', highlight:'激しい'},
+      ],
+      tip: '激しい可修饰：运动/比赛/争论/天气/痛。副词用法：激しく運動する（剧烈运动）',
+      related: [{jp:'強い', cn:'强烈的'}, {jp:'ひどい', cn:'严重的'}, {jp:'穏やか', cn:'温和的'}]
+    },
+    '珍しい': {
+      read: 'めずらしい', cn: '稀有的、罕见的', type: 'adj-i', typeColor: '#f4845f',
+      conj: [
+        {label:'基本形', form:'珍しい', read:'めずらしい'},
+        {label:'否定形', form:'珍しくない', read:'めずらしくない'},
+        {label:'过去形', form:'珍しかった', read:'めずらしかった'},
+        {label:'て形', form:'珍しくて', read:'めずらしくて'},
+        {label:'副词形', form:'珍しく', read:'めずらしく'},
+        {label:'名词化', form:'珍しさ', read:'めずらしさ'},
+        {label:'条件形', form:'珍しければ', read:'めずらしければ'},
+        {label:'仮定逆接', form:'珍しくても', read:'めずらしくても'},
+      ],
+      examples: [
+        {jp:'これは珍しい植物だ。', cn:'这是一种罕见的植物。', highlight:'珍しい'},
+        {jp:'彼が遅刻するなんて珍しい。', cn:'他迟到，真是少见。', highlight:'珍しい'},
+        {jp:'珍しく、早起きした。', cn:'难得地，早起了。', highlight:'珍しく'},
+      ],
+      tip: '<strong>珍しく〜した</strong>表示"难得/少见地做了某事"，表达与平时不同的行为。',
+      related: [{jp:'貴重な', cn:'珍贵的'}, {jp:'特別な', cn:'特别的'}, {jp:'普通の', cn:'普通的'}]
+    },
+    '積極的': {
+      read: 'せっきょくてき', cn: '积极的', type: 'adj-na', typeColor: '#6fa8ff',
+      conj: [
+        {label:'基本形', form:'積極的な', read:'せっきょくてきな'},
+        {label:'否定形', form:'積極的ではない', read:'せっきょくてきではない'},
+        {label:'过去形', form:'積極的だった', read:'せっきょくてきだった'},
+        {label:'て形', form:'積極的で', read:'せっきょくてきで'},
+        {label:'副词形', form:'積極的に', read:'せっきょくてきに'},
+        {label:'名词化', form:'積極性', read:'せっきょくせい'},
+        {label:'条件形', form:'積極的なら', read:'せっきょくてきなら'},
+        {label:'逆接', form:'積極的でも', read:'せっきょくてきでも'},
+      ],
+      examples: [
+        {jp:'積極的に意見を言う。', cn:'积极地发表意见。', highlight:'積極的に'},
+        {jp:'彼女は積極的な性格だ。', cn:'她是积极主动的性格。', highlight:'積極的な'},
+        {jp:'もっと積極的になりたい。', cn:'想变得更加积极。', highlight:'積極的に'},
+      ],
+      tip: '<strong>積極的に〜する</strong>（积极地做…）是N3作文的常用表达。反义词：消極的。',
+      related: [{jp:'消極的', cn:'消极的'}, {jp:'前向き', cn:'正面思考'}, {jp:'やる気', cn:'干劲'}]
+    },
+    'やはり': {
+      read: 'やはり', cn: '果然、还是、终究', type: 'adv', typeColor: '#4ecdc4',
+      conj: [
+        {label:'标准形', form:'やはり', read:'やはり'},
+        {label:'口语形', form:'やっぱり', read:'やっぱり'},
+        {label:'书面形', form:'やはり', read:'やはり'},
+        {label:'强调形', form:'やはりどうしても', read:'やはりどうしても'},
+        {label:'连接用法', form:'やはり〜だと思う', read:''},
+        {label:'感叹用法', form:'やっぱり！', read:''},
+        {label:'肯定结论', form:'やはり〜だった', read:''},
+        {label:'否定结论', form:'やはり〜ではなかった', read:''},
+      ],
+      examples: [
+        {jp:'やはり日本語は難しい。', cn:'果然日语还是很难。', highlight:'やはり'},
+        {jp:'やっぱり、彼が正しかった。', cn:'果然，他是对的。', highlight:'やっぱり'},
+        {jp:'考えたが、やはりやめることにした。', cn:'考虑了，但还是决定放弃。', highlight:'やはり'},
+      ],
+      tip: '<strong>やはり</strong>（书面/正式）= <strong>やっぱり</strong>（口语）。常表示"根据经验/推测，结果符合预期"',
+      related: [{jp:'結局', cn:'结果'}, {jp:'やっぱり', cn:'果然（口语）'}, {jp:'案の定', cn:'果不其然'}]
+    },
+    'ますます': {
+      read: 'ますます', cn: '越来越（程度递增）', type: 'adv', typeColor: '#4ecdc4',
+      conj: [
+        {label:'标准形', form:'ますます', read:'ますます'},
+        {label:'结合い形', form:'ますます〜くなる', read:''},
+        {label:'结合な形', form:'ますます〜になる', read:''},
+        {label:'结合动词', form:'ますます〜ている', read:''},
+        {label:'书面替代', form:'いよいよ', read:'いよいよ'},
+        {label:'强调搭配', form:'ますますもって', read:''},
+        {label:'肯定用法', form:'ますます良くなる', read:''},
+        {label:'否定用法', form:'ますます悪くなる', read:''},
+      ],
+      examples: [
+        {jp:'ますます日本語が上手になってきた。', cn:'日语越来越好了。', highlight:'ますます'},
+        {jp:'気温がますます下がっている。', cn:'气温越来越低。', highlight:'ますます'},
+        {jp:'問題がますます複雑になった。', cn:'问题变得越来越复杂。', highlight:'ますます'},
+      ],
+      tip: '<strong>ますます</strong>强调变化的持续递增，常与<strong>〜なる / 〜てくる</strong>搭配。',
+      related: [{jp:'どんどん', cn:'不断地'}, {jp:'だんだん', cn:'渐渐地'}, {jp:'次第に', cn:'逐渐'}]
+    },
+    'なるべく': {
+      read: 'なるべく', cn: '尽量、尽可能', type: 'adv', typeColor: '#4ecdc4',
+      conj: [
+        {label:'标准形', form:'なるべく', read:'なるべく'},
+        {label:'书面替代', form:'できるだけ', read:'できるだけ'},
+        {label:'正式替代', form:'できる限り', read:'できるかぎり'},
+        {label:'结合动词', form:'なるべく〜する', read:''},
+        {label:'结合ない形', form:'なるべく〜しない', read:''},
+        {label:'强调用法', form:'なるべく早く', read:''},
+        {label:'日常用法', form:'なるべく毎日', read:''},
+        {label:'口语缩略', form:'なるべくね', read:''},
+      ],
+      examples: [
+        {jp:'なるべく早く来てください。', cn:'请尽量早点来。', highlight:'なるべく'},
+        {jp:'なるべく野菜を食べるようにしている。', cn:'我尽量注意多吃蔬菜。', highlight:'なるべく'},
+        {jp:'なるべく迷惑をかけないようにする。', cn:'尽量不给别人添麻烦。', highlight:'なるべく'},
+      ],
+      tip: '<strong>なるべく ≈ できるだけ</strong>。区别：できるだけ更强调"最大努力"，なるべく语气稍轻。',
+      related: [{jp:'できるだけ', cn:'尽可能'}, {jp:'できる限り', cn:'尽量（正式）'}, {jp:'できれば', cn:'如果可以的话'}]
+    },
+    'せっかく': {
+      read: 'せっかく', cn: '好不容易、特地', type: 'adv', typeColor: '#4ecdc4',
+      conj: [
+        {label:'标准形', form:'せっかく', read:'せっかく'},
+        {label:'结合のに', form:'せっかく〜のに', read:''},
+        {label:'结合から', form:'せっかくだから', read:''},
+        {label:'结合ですから', form:'せっかくですから', read:''},
+        {label:'结合た形', form:'せっかく〜た', read:''},
+        {label:'遗憾用法', form:'せっかくなのに', read:''},
+        {label:'珍惜用法', form:'せっかくだし', read:''},
+        {label:'劝诱用法', form:'せっかくだから〜よう', read:''},
+      ],
+      examples: [
+        {jp:'せっかく来たのに、会えなかった。', cn:'好不容易来了，却没能见到。', highlight:'せっかく'},
+        {jp:'せっかくだから、食べていって。', cn:'既然特地来了，就吃了再走吧。', highlight:'せっかく'},
+        {jp:'せっかくの休みを無駄にした。', cn:'白白浪费了难得的假期。', highlight:'せっかく'},
+      ],
+      tip: '<strong>せっかく〜のに</strong>（好不容易…却）表遗憾。<strong>せっかくだから</strong>（既然如此）劝说别人。',
+      related: [{jp:'やっと', cn:'终于'}, {jp:'ようやく', cn:'好不容易'}, {jp:'わざわざ', cn:'特意'}]
+    },
+    // ---- NOUNS ----
+    '理由': {
+      read: 'りゆう', cn: '理由、原因', type: 'noun', typeColor: '#c9a84c',
+      conj: [
+        {label:'单独使用', form:'理由', read:'りゆう'},
+        {label:'は+です', form:'理由はです', read:'りゆうはです'},
+        {label:'が+ある', form:'理由がある', read:'りゆうがある'},
+        {label:'が+ない', form:'理由がない', read:'りゆうがない'},
+        {label:'を+説明する', form:'理由を説明する', read:'りゆうをせつめいする'},
+        {label:'を+聞く', form:'理由を聞く', read:'りゆうをきく'},
+        {label:'〜という理由で', form:'〜という理由で', read:''},
+        {label:'修饰名词', form:'理由のない', read:'りゆうのない'},
+      ],
+      examples: [
+        {jp:'遅刻した理由を説明してください。', cn:'请说明迟到的理由。', highlight:'理由'},
+        {jp:'理由もなく怒られた。', cn:'无缘无故被骂了。', highlight:'理由'},
+        {jp:'どんな理由があってもダメだ。', cn:'不管什么理由都不行。', highlight:'理由'},
+      ],
+      tip: '<strong>理由</strong>（りゆう）vs <strong>原因</strong>（げんいん）：理由是主观解释，原因是客观成因。',
+      related: [{jp:'原因', cn:'原因'}, {jp:'きっかけ', cn:'契机'}, {jp:'目的', cn:'目的'}]
+    },
+    '影響': {
+      read: 'えいきょう', cn: '影响', type: 'noun', typeColor: '#c9a84c',
+      conj: [
+        {label:'单独', form:'影響', read:'えいきょう'},
+        {label:'を与える', form:'影響を与える', read:'えいきょうをあたえる'},
+        {label:'を受ける', form:'影響を受ける', read:'えいきょうをうける'},
+        {label:'がある', form:'影響がある', read:'えいきょうがある'},
+        {label:'がない', form:'影響がない', read:'えいきょうがない'},
+        {label:'する（动词）', form:'影響する', read:'えいきょうする'},
+        {label:'された（被动）', form:'影響された', read:'えいきょうされた'},
+        {label:'修饰形', form:'影響のある', read:'えいきょうのある'},
+      ],
+      examples: [
+        {jp:'天気が気分に影響する。', cn:'天气影响心情。', highlight:'影響する'},
+        {jp:'親の行動が子どもに影響を与える。', cn:'父母的行为影响孩子。', highlight:'影響を与える'},
+        {jp:'環境の影響を受けやすい。', cn:'容易受环境影响。', highlight:'影響を受け'},
+      ],
+      tip: '关键搭配：<strong>影響を与える</strong>（给予影响）/ <strong>影響を受ける</strong>（受到影响）/ <strong>〜に影響する</strong>',
+      related: [{jp:'効果', cn:'效果'}, {jp:'結果', cn:'结果'}, {jp:'変化', cn:'变化'}]
+    },
+    '気持ち': {
+      read: 'きもち', cn: '心情、感受', type: 'noun', typeColor: '#c9a84c',
+      conj: [
+        {label:'单独', form:'気持ち', read:'きもち'},
+        {label:'がいい', form:'気持ちがいい', read:'きもちがいい'},
+        {label:'が悪い', form:'気持ちが悪い', read:'きもちがわるい'},
+        {label:'がわかる', form:'気持ちがわかる', read:'きもちがわかる'},
+        {label:'を伝える', form:'気持ちを伝える', read:'きもちをつたえる'},
+        {label:'的な形容', form:'気持ちのいい', read:'きもちのいい'},
+        {label:'状态描述', form:'気持ちが落ち着く', read:'きもちがおちつく'},
+        {label:'疑问句', form:'気持ちはどうですか', read:''},
+      ],
+      examples: [
+        {jp:'気持ちが落ち着いてきた。', cn:'心情平静下来了。', highlight:'気持ち'},
+        {jp:'その気持ち、よくわかる。', cn:'那种心情，我很理解。', highlight:'気持ち'},
+        {jp:'気持ちがいい天気だ。', cn:'天气真好（令人心旷神怡）。', highlight:'気持ちが'},
+      ],
+      tip: '<strong>気持ち</strong>（心情/感受）vs <strong>気分</strong>（状态/氛围）：気分が悪い（身体不适）= 恶心',
+      related: [{jp:'気分', cn:'心情/状态'}, {jp:'感情', cn:'感情'}, {jp:'感じ', cn:'感觉'}]
+    },
+    '経験': {
+      read: 'けいけん', cn: '经验、经历', type: 'noun', typeColor: '#c9a84c',
+      conj: [
+        {label:'单独', form:'経験', read:'けいけん'},
+        {label:'する（動詞）', form:'経験する', read:'けいけんする'},
+        {label:'した（过去）', form:'経験した', read:'けいけんした'},
+        {label:'がある', form:'経験がある', read:'けいけんがある'},
+        {label:'がない', form:'経験がない', read:'けいけんがない'},
+        {label:'を積む', form:'経験を積む', read:'けいけんをつむ'},
+        {label:'豊富な', form:'経験豊富な', read:'けいけんほうふな'},
+        {label:'から学ぶ', form:'経験から学ぶ', read:'けいけんからまなぶ'},
+      ],
+      examples: [
+        {jp:'海外で働いた経験がある。', cn:'有在海外工作的经验。', highlight:'経験がある'},
+        {jp:'この経験から多くを学んだ。', cn:'从这段经历中学到了很多。', highlight:'経験'},
+        {jp:'経験を積むことが大切だ。', cn:'积累经验很重要。', highlight:'経験を積む'},
+      ],
+      tip: '常用句型：<strong>〜した経験がある</strong>（有做过…的经历）。与た形経験形（N4）区分。',
+      related: [{jp:'経歴', cn:'经历'}, {jp:'体験', cn:'亲身体验'}, {jp:'知識', cn:'知识'}]
+    },
+  };
+
+  // Type labels
+  const TYPE_LABELS = {
+    'verb1': {label:'一类动词（う动）', bg:'rgba(42,157,143,0.2)', color:'#4ecdc4'},
+    'verb2': {label:'二类动词（る动）', bg:'rgba(123,94,167,0.2)', color:'#a882d4'},
+    'verb3': {label:'三类动词（サ変）', bg:'rgba(58,134,255,0.2)', color:'#6fa8ff'},
+    'adj-i': {label:'イ形容词', bg:'rgba(244,132,95,0.2)', color:'#f4845f'},
+    'adj-na': {label:'ナ形容词', bg:'rgba(58,134,255,0.2)', color:'#6fa8ff'},
+    'adv': {label:'副词', bg:'rgba(42,157,143,0.2)', color:'#4ecdc4'},
+    'noun': {label:'名词', bg:'rgba(201,168,76,0.2)', color:'#c9a84c'},
+  };
+
+  // ===================================================
+  // POPUP LOGIC
+  // ===================================================
+  let currentWord = null;
+
+  function openWordPopup(jpText, cnText) {
+    // Try to find in database
+    let entry = WORD_DB[jpText];
+    
+    // If not found, create a basic entry
+    if (!entry) {
+      entry = {
+        read: '', cn: cnText || '', type: 'noun', typeColor: '#c9a84c',
+        conj: [],
+        examples: [],
+        tip: '',
+        related: []
+      };
+    }
+
+    currentWord = jpText;
+
+    // Fill popup
+    document.getElementById('popupJpWord').textContent = jpText;
+    document.getElementById('popupReading').textContent = entry.read ? `【${entry.read}】` : '';
+    document.getElementById('popupCnMeaning').textContent = entry.cn;
+
+    // Type badge
+    const typeInfo = TYPE_LABELS[entry.type] || {label: entry.type, bg:'rgba(201,168,76,0.2)', color:'#c9a84c'};
+    const badge = document.getElementById('popupTypeBadge');
+    badge.innerHTML = `<span class="popup-type-badge" style="background:${typeInfo.bg};color:${typeInfo.color}">${typeInfo.label}</span>`;
+
+    // Conjugation grid
+    const conjGrid = document.getElementById('conjGrid');
+    const conjSection = document.getElementById('conjSection');
+    if (entry.conj && entry.conj.length > 0) {
+      conjGrid.innerHTML = entry.conj.map(c => `
+        <div class="conj-cell" onclick="speakText('${c.form}')">
+          <div class="conj-label">${c.label}</div>
+          <div class="conj-form">${c.form}</div>
+          ${c.read ? `<div class="conj-read">${c.read}</div>` : ''}
+        </div>
+      `).join('');
+      conjSection.style.display = '';
+    } else {
+      conjSection.style.display = 'none';
+    }
+
+    // Examples
+    const exList = document.getElementById('exList');
+    const exSection = document.getElementById('exSection');
+    if (entry.examples && entry.examples.length > 0) {
+      exList.innerHTML = entry.examples.map(ex => {
+        const highlighted = ex.jp.replace(ex.highlight, `<span class="highlight-word">${ex.highlight}</span>`);
+        return `
+          <div class="example-card" onclick="speakText('${ex.jp.replace(/'/g,"\\'")}')">
+            <span class="ex-speak" title="点击朗读">🔊</span>
+            <div class="ex-jp">${highlighted}</div>
+            <div class="ex-cn">${ex.cn}</div>
+          </div>`;
+      }).join('');
+      exSection.style.display = '';
+    } else {
+      exSection.style.display = 'none';
+    }
+
+    // Tip
+    const tipSection = document.getElementById('tipSection');
+    if (entry.tip) {
+      document.getElementById('tipBox').innerHTML = entry.tip;
+      tipSection.style.display = '';
+    } else {
+      tipSection.style.display = 'none';
+    }
+
+    // Related
+    const relSection = document.getElementById('relatedSection');
+    const relGrid = document.getElementById('relatedGrid');
+    if (entry.related && entry.related.length > 0) {
+      relGrid.innerHTML = entry.related.map(r => `
+        <div class="related-tag" onclick="openWordPopup('${r.jp}','${r.cn}')">
+          <span class="related-jp">${r.jp}</span>
+          <span class="related-cn">${r.cn}</span>
+        </div>
+      `).join('');
+      relSection.style.display = '';
+    } else {
+      relSection.style.display = 'none';
+    }
+
+    // Show popup
+    document.getElementById('wordPopup').classList.add('active');
+    document.getElementById('popupCard').scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    document.getElementById('wordPopup').classList.remove('active');
+    document.body.style.overflow = '';
+    stopSpeaking();
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('wordPopup')) closePopup();
+  }
+
+  // Keyboard close
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+  // ===================================================
+  // SPEECH SYNTHESIS
+  // ===================================================
+  let currentUtterance = null;
+
+  function speakText(text) {
+    if (!window.speechSynthesis) return;
+    stopSpeaking();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'ja-JP';
+    utter.rate = 0.85;
+    utter.pitch = 1.0;
+    
+    // Try to find Japanese voice
+    const voices = window.speechSynthesis.getVoices();
+    const jpVoice = voices.find(v => v.lang.startsWith('ja'));
+    if (jpVoice) utter.voice = jpVoice;
+
+    utter.onstart = () => document.getElementById('speakBtn').classList.add('speaking');
+    utter.onend = () => document.getElementById('speakBtn').classList.remove('speaking');
+    utter.onerror = () => document.getElementById('speakBtn').classList.remove('speaking');
+    
+    currentUtterance = utter;
+    window.speechSynthesis.speak(utter);
+  }
+
+  function speakWord() {
+    if (currentWord) speakText(currentWord);
+  }
+
+  function stopSpeaking() {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    document.getElementById('speakBtn').classList.remove('speaking');
+  }
+
+  // Load voices async
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+
+  // ===================================================
+  // ATTACH CLICK HANDLERS TO VOCAB TAGS
+  // ===================================================
+  function attachVocabHandlers() {
+    document.querySelectorAll('.vocab-tag').forEach(tag => {
+      const jpEl = tag.querySelector('.vocab-jp');
+      const cnEl = tag.querySelector('.vocab-cn');
+      if (!jpEl) return;
+      const jp = jpEl.textContent.trim();
+      const cn = cnEl ? cnEl.textContent.trim() : '';
+      tag.style.cursor = 'pointer';
+      tag.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openWordPopup(jp, cn);
+      });
+    });
+
+    // Also attach to grammar-jp spans inside grammar-item headers
+    document.querySelectorAll('.grammar-item .grammar-jp').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.title = '点击查看详情';
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const jp = el.textContent.trim();
+        const cnEl = el.nextElementSibling;
+        const cn = cnEl ? cnEl.textContent.trim() : '';
+        openWordPopup(jp, cn);
+      });
+    });
+  }
+
+  // Run after DOM is ready (cards may not be open yet, but handlers are on elements)
+  attachVocabHandlers();
+
+  // Open first card on load for demo
+  document.querySelectorAll('.card')[0].classList.add('open');
+</script>
+</body>
+</html>
